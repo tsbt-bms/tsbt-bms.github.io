@@ -6,6 +6,7 @@
    <script src="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash.js"></script>
    <link href="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash_editor.css" rel="stylesheet">
    <script src="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash_editor.js"></script>
+   <script src="https://tsbt-srpvsp.github.io/tsbt-admin/tsbt.js"></script>  
    <script>
      var bank= "TS01";
      var batt="0001";
@@ -38,7 +39,7 @@
     try {
       var j = JSON.parse(line);
       console.log("Received JSON: ",j);
-      elements.temperature.setValue(j.temperature);
+      o.g.setValue(j.temperature);
     } catch(e) {
       console.log("Received: ",line);
     }
@@ -52,7 +53,7 @@
       }
       connection = c;
       // remove modal window
-      elements.modal.remove();
+         o.modal.remove();
       // Handle the data we get back, and call 'onLine'
       // whenever we get a line
       var buf = "";
