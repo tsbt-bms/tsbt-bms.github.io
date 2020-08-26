@@ -18,7 +18,7 @@
        v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
        vs:TD.value({x:10,y:160,width:200,height:60,label:"Balanceamento",value:"3.9",min:3.0,step:0.1,max:3.9}),
        bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
-       btn:TD.value({x:10,y:230,width:300,height:60,label:"alterar bateria",value:"3.9",min:1,step1,max:200}),
+       btn:TD.value({x:10,y:230,width:300,height:60,label:"alterar bateria",value:"3.9",min:1,step:1,max:200}),
        ab:TD.toggle({x:310,y:250,width:200,height:100,label:"Ativar",value:1,name:"toggle"}),
        s:TD.button({x:430,y:250,width:200,height:100,label:"Salvar",value:0,name:"buttonS",onchange:function(e){o.log.log("Salvo!");}}),
        b:TD.button({x:220,y:250,width:200,height:100,label:"Localizar",value:0,name:"buttonL",onchange:function(e){o.log.log("Piscando!");}}),
