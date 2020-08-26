@@ -7,12 +7,14 @@
    <link href="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash_editor.css" rel="stylesheet">
    <script src="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash_editor.js"></script>
    <script>
+     var bank= "TS01";
+     var batt="0001";
      var data = [];
      for (var i=0;i<100;i++) data.push(Math.cos(i/10));
      var o = {
        l:TD.label({x:10,y:10,width:200,height:40,label:"TSBT dashboard"}),
-       bk:TD.value({x:10,y:60,width:200,height:40,label:"Banco:",value:"TS01"}),
-       bt:TD.value({x:10,y:110,width:200,height:40,label:"Bateria:",value:"001"}),
+       bk:TD.label({x:10,y:60,width:200,height:40,label:"Banco:" + bank}),
+       bt:TD.label({x:10,y:110,width:200,height:40,label:"Bateria:"+batt}),
        v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
        vs:TD.value({x:10,y:160,width:200,height:60,label:"Ajuste de balanceamento",value:"3.9",min:3.0,step:0.1,max:3.9}),
        ab:TD.toggle({x:10,y:230,width:200,height:100,label:"Ativar\nbalanceamento",value:1,name:"toggle"}),
