@@ -13,6 +13,7 @@
     try {
       var j = JSON.parse(line);
       console.log("Received JSON: ",j);
+      document.body.appendChild(par.appendChild(text))
       elements.light.setValue(j.light*100);
     } catch(e) {
       console.log("Received: ",line);
@@ -40,19 +41,7 @@
           i = buf.indexOf("\n");
         }
       });
-      // First, reset tsbt.js
-      connection.write("reset();\n", function() {
-        // Wait for it to reset itself
-        setTimeout(function() {
-          // Now tell it to write data on the current light level to Bluetooth
-          // 10 times a second. Also ensure that when disconnected, tsbt.js
-          // resets so the setInterval doesn't keep draining battery.
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({light:tsbt.light()}));},100);NRF.on('disconnect', function() {reset()});\n",
-            function() { console.log("Ready..."); });
-          }, 1500);
-        });
-      });
-
+      
   }
   // Set up the controls we see on the screen    
   var elements = {
@@ -62,6 +51,11 @@
   }
   for (var i in elements)
     document.body.appendChild(elements[i]);
+  </script>
+   <script>
+    var par = document.createElement("p"); //creating the paragraph element 
+    var text = document.createTextNode("Text Added to the body"); //creating the text node
+    document.body.appendChild(par.appendChild(text)); //appending the text to paragraph and appending the paragraph to the body.
   </script>
  </body>
 </html>
