@@ -25,7 +25,7 @@
        g:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
        //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
        log:TD.log({x:10,y:510,width:620,height:200,label:"Log",text:"banco => TS01\nbatt => 001\nbal => 3.90"}),
-       modal:TD.modal({x:10,y:10,width:620,height:620,label:"Clique para conectar",onchange:function(){connectDevice;o.modal.remove()}})
+       modal:TD.modal({x:10,y:10,width:620,height:620,label:"Clique para conectar",onchange:connectDevice})
      };
      //o.log.log("Olá");
      
