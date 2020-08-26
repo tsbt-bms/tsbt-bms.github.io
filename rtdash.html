@@ -24,6 +24,7 @@ body {
     try {
       var j = JSON.parse(line);
       console.log("Received JSON: ",j);
+     var text = document.createTextNode(j); //creating the text node;
       document.body.appendChild(par.appendChild(text))
      // elements.light.setValue(j.light*100);
     } catch(e) {
