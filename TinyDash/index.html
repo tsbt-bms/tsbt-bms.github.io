@@ -33,6 +33,53 @@
      }, 100);
      
      //TD.startEditor();
+
+     function onLine(line) {
+    try {
+      var j = JSON.parse(line);
+      console.log("Received JSON: ",j);
+      elements.temperature.setValue(j.temperature);
+    } catch(e) {
+      console.log("Received: ",line);
+    }
+  }
+  var connection;
+  function connectDevice() {
+    tsbt.connect(function(c) {
+      if (!c) {
+        alert("Couldn't connect!");
+        return;
+      }
+      connection = c;
+      // remove modal window
+      elements.modal.remove();
+      // Handle the data we get back, and call 'onLine'
+      // whenever we get a line
+      var buf = "";
+      connection.on("data", function(d) {
+        buf += d;
+        var i = buf.indexOf("\n");
+        while (i>=0) {
+          onLine(buf.substr(0,i));
+          buf = buf.substr(i+1);
+          i = buf.indexOf("\n");
+        }
+      });
+      // First, reset tsbt.js
+      connection.write("reset();\n", function() {
+        // Wait for it to reset itself
+        setTimeout(function() {
+          // Now tell it to write data on the current temperature level to Bluetooth
+          // 10 times a second. Also ensure that when disconnected, tsbt.js
+          // resets so the setInterval doesn't keep draining battery.
+          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({bt:E.getTemperature()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({bv:getVin()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+            function() { console.log("Ready..."); });
+          }, 1500);
+        });
+      });
+
+  }
    </script>
  
 
