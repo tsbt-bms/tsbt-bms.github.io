@@ -73,9 +73,9 @@
           // Now tell it to write data on the current temperature level to Bluetooth
           // 10 times a second. Also ensure that when disconnected, tsbt.js
           // resets so the setInterval doesn't keep draining battery.
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({o.g:E.getTemperature()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+          connection.write("setInterval(function(){o.v.setValue(getVin());},5000);NRF.on('disconnect', function() {reset()});\n",
             function() { console.log("Temperature ready..."); });
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({o.v:getVin()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+          connection.write("setInterval(function(){o.g.setValue(E.getTemperature());},,5000);NRF.on('disconnect', function() {reset()});\n",
             function() { console.log("Battery voltage ready..."); });
           }, 1500);
         });
