@@ -13,14 +13,14 @@
        l:TD.label({x:10,y:10,width:200,height:40,label:"TSBT dashboard"}),
        bk:TD.label({x:10,y:60,width:200,height:40,label:"Banco: TS01"}),
        bt:TD.label({x:10,y:110,width:200,height:40,label:"Bateria: 001"}),
-       v:TD.gauge({x:10,y:430,width:200,height:200,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
+       v:TD.gauge({x:430,y:10,width:200,height:200,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
        vs:TD.value({x:10,y:160,width:200,height:60,label:"Ajuste de balanceamento",value:"3.9",min:3.0,step:0.1,max:3.9}),
        ab:TD.toggle({x:10,y:290,width:200,height:70,label:"Ativar\nbalanceamento",value:1,name:"toggle"}),
        s:TD.button({x:10,y:360,width:200,height:100,label:"Salvar",value:0,name:"buttonS",onchange:function(e){o.log.log("Salvo!");}}),
        b:TD.button({x:420,y:360,width:200,height:100,label:"Localizar",value:0,name:"buttonL",onchange:function(e){o.log.log("Piscando!");}}),
        g:TD.gauge({x:220,y:10,width:200,height:200,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
        //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
-       log:TD.log({x:430,y:10,width:190,height:200,label:"Log",text:"banco => TS01\nbatt => 001\nbal => 3.90"}),
+       log:TD.log({x:10,y:430,width:190,height:200,label:"Log",text:"banco => TS01\nbatt => 001\nbal => 3.90"}),
        //modal:TD.modal({x:10,y:10,width:400,height:400,label:"Clique para conectar",onchange:function(el) {o.log.log("Modal clicked");el.remove()}})
      };
      o.log.log("Olá");
