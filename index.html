@@ -41,13 +41,13 @@
         }
       });
       // First, reset tsbt.js
-      connection.write("reset();\n", function() {
+      connection.write("LED1.set()", function() {
         // Wait for it to reset itself
         setTimeout(function() {
           // Now tell it to write data on the current temperature level to Bluetooth
           // 10 times a second. Also ensure that when disconnected, tsbt.js
           // resets so the setInterval doesn't keep draining battery.
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({temperature:E.getTemperature()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({temperature:getVin()}));},5000);NRF.on('disconnect', function() {reset()});\n",
             function() { console.log("Ready..."); });
           }, 1500);
         });
@@ -57,7 +57,7 @@
   // Set up the controls we see on the screen    
   var elements = {
     heading : TD.label({x:10,y:10,width:190,height:50,label:"TSBT Dashboard"}),
-    temperature : TD.gauge({x:10,y:70,width:190,height:220,label:"Temperatura",value:0,min:0,max:100}),
+    temperature : TD.gauge({x:10,y:70,width:190,height:220,label:"Tensão da Bateria",value:0,min:0,max:100}),
     modal: TD.modal({x:10,y:10,width:190,height:430,label:"Clique para conectar",onchange:connectDevice})
   }
   for (var i in elements)
