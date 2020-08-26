@@ -12,7 +12,7 @@
      var data = [];
      for (var i=0;i<100;i++) data.push(Math.cos(i/10));
      var o = {
-       l:TD.label({x:10,y:10,width:200,height:40,label:"TSBT CGO KF velha"}),
+       l:TD.label({x:10,y:10,width:200,height:40,label:"TSBT CGO-KFV"}),
        bk:TD.label({x:10,y:60,width:200,height:40,label:"Banco: " + bank}),
        bt:TD.label({x:10,y:110,width:200,height:40,label:"Bateria: "+batt}),
        v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
@@ -20,7 +20,7 @@
        ab:TD.toggle({x:10,y:230,width:200,height:100,label:"Ativar",value:1,name:"toggle"}),
        s:TD.button({x:430,y:230,width:200,height:100,label:"Salvar",value:0,name:"buttonS",onchange:function(e){o.log.log("Salvo!");}}),
        b:TD.button({x:220,y:230,width:200,height:100,label:"Localizar",value:0,name:"buttonL",onchange:function(e){o.log.log("Piscando!");}}),
-       g:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
+       g:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"})
        //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
        //log:TD.log({x:10,y:340,width:620,height:200,label:"Log",text:"banco => TS01\nbatt => 001\nbal => 3.90"}),
        //modal:TD.modal({x:10,y:10,width:400,height:400,label:"Clique para conectar",onchange:function(el) {o.log.log("Modal clicked");el.remove()}})
