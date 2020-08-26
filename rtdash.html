@@ -20,7 +20,7 @@
   }
   var connection;
   function connectDevice() {
-    Puck.connect(function(c) {
+    tsbt.connect(function(c) {
       if (!c) {
         alert("Couldn't connect!");
         return;
@@ -40,14 +40,14 @@
           i = buf.indexOf("\n");
         }
       });
-      // First, reset Puck.js
+      // First, reset tsbt.js
       connection.write("reset();\n", function() {
         // Wait for it to reset itself
         setTimeout(function() {
           // Now tell it to write data on the current light level to Bluetooth
-          // 10 times a second. Also ensure that when disconnected, Puck.js
+          // 10 times a second. Also ensure that when disconnected, tsbt.js
           // resets so the setInterval doesn't keep draining battery.
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({light:Puck.light()}));},100);NRF.on('disconnect', function() {reset()});\n",
+          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({light:tsbt.light()}));},100);NRF.on('disconnect', function() {reset()});\n",
             function() { console.log("Ready..."); });
           }, 1500);
         });
