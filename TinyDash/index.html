@@ -25,7 +25,7 @@
        g:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
        //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
        log:TD.log({x:10,y:510,width:620,height:200,label:"Log",text:"banco => TS01\nbatt => 001\nbal => 3.90"}),
-       modal:TD.modal({x:10,y:10,width:620,height:620,label:"Clique para conectar",onchange:function(){connectDevice;modal.remove()}})
+       modal:TD.modal({x:10,y:10,width:620,height:620,label:"Clique para conectar",onchange:function(){connectDevice;o.modal.remove()}})
      };
      //o.log.log("Olá");
      
@@ -72,9 +72,9 @@
           // Now tell it to write data on the current temperature level to Bluetooth
           // 10 times a second. Also ensure that when disconnected, tsbt.js
           // resets so the setInterval doesn't keep draining battery.
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({g:E.getTemperature()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({o.g:E.getTemperature()}));},5000);NRF.on('disconnect', function() {reset()});\n",
             function() { console.log("Temperature ready..."); });
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({v:getVin()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({o.v:getVin()}));},5000);NRF.on('disconnect', function() {reset()});\n",
             function() { console.log("Battery voltage ready..."); });
           }, 1500);
         });
