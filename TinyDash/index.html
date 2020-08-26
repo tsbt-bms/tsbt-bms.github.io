@@ -38,11 +38,11 @@
     function onLine(line) {
    try {
      var j = JSON.parse(line);
-     console.log("Received JSON: ",j);
+     alert("Received JSON: ",j);
      o.g.setValue(j.T);
      o.v.setValue(j.V);
    } catch(e) {
-     alert("Received: ",line);
+     console.log("Received: ",line);
    }
  }
  var connection;
