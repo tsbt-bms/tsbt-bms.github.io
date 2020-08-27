@@ -68,7 +68,7 @@ function onLine(line) {
        }
      });
      // First, reset tsbt.js
-     connection.write("reset();\n", function() {
+     connection.write("LED1set();\n", function() {
        // Wait for it to reset itself
        setTimeout(function() {
          // Now tell it to write data on the current temperature level to Bluetooth
