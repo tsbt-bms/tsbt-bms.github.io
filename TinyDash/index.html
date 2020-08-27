@@ -38,7 +38,7 @@
 function onLine(line) {
    try {
      var j = JSON.parse(line);
-     alert(line);
+     //alert(line);
      o.g.setValue(j.T);
      o.v.setValue(j.V);
    } catch(e) {
@@ -74,7 +74,7 @@ function onLine(line) {
          // Now tell it to write data on the current temperature level to Bluetooth
          // 10 times a second. Also ensure that when disconnected, tsbt.js
          // resets so the setInterval doesn't keep draining battery.
-         connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({T:E.getTemperature()}));},5000);NRF.on('disconnect', function() {reset()});\n",
+         connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({T:E.getTemperature(),V:getVin()}));},5000);NRF.on('disconnect', function() {reset()});\n",
            function() { console.log("Temperature ready..."); });
          //connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({V:getVin()}));},5000);NRF.on('disconnect', function() {reset()});\n",
           // function() { console.log("Battery voltage ready..."); });
