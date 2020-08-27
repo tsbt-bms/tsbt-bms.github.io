@@ -37,8 +37,8 @@
 
 function onLine(line) {
    try {
-     var j = JSON.parse(line);
      o.log.log(line);
+     var j = JSON.parse(line);
      o.g.setValue(j.T);
      o.v.setValue(j.V);
    } catch(e) {
