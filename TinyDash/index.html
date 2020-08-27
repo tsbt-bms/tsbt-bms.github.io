@@ -42,9 +42,9 @@ function onLine(line) {
      o.log.log(line);
      o.t.setValue(j.T);
      o.v.setValue(j.V);
-    // o.bk.setValue(j.Bkn);
-   //  o.vs.setValue(j.Vb);
-    // o.bt.setValue(j.Btn);
+     o.bk.setValue(j.Bkn);
+     o.vs.setValue(j.Vb);
+     o.bt.setValue(j.Btn);
                    
    } catch(e) {
      o.log.log("erro na leitura: "+e);
@@ -79,7 +79,7 @@ function onLine(line) {
          // Now tell it to write data on the current temperature level to Bluetooth
          // 10 times a second. Also ensure that when disconnected, tsbt.js
          // resets so the setInterval doesn't keep draining battery.
-         connection.write("int=setInterval(function(){Bluetooth.println(JSON.stringify({T:E.getTemperature(),V:getVin()}));},5000);NRF.on('disconnect', function() {LED1.reset();clearInterval(int);});\n",
+         connection.write("int=setInterval(function(){Bluetooth.println(JSON.stringify({T:E.getTemperature(),V:getVin(),Vb:Vbalance,Bkn:bankName,Btn:battName,L:local}));},5000);NRF.on('disconnect', function() {LED1.reset();clearInterval(int);});\n",
            function() { console.log("Lido..."); });
          }, 1500);
        });
@@ -87,6 +87,5 @@ function onLine(line) {
 
  }
   </script>
-
 
 </body></html>
