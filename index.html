@@ -1,67 +1,95 @@
-<html>
- <head>
-  <title>TSBT LiFePO4</title>
-  <meta name="viewport" content="width=210, initial-scale=1">
- </head>
- <body style="width:210px;height:450px">
-  <link href="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash.css" rel="stylesheet">
+<html><head>
+  <meta name="viewport" content="width=640, initial-scale=1">
+</head>
+<body>
+ // <link href="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash.css" rel="stylesheet">
   <script src="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash.js"></script>
+//  <link href="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash_editor.css" rel="stylesheet">
+  <script src="https://tsbt-srpvsp.github.io/tsbt-admin/TinyDash/tinydash_editor.js"></script>
   <script src="https://tsbt-srpvsp.github.io/tsbt-admin/tsbt.js"></script>  
   <script>
-  // Called when we get a line of data - updates the temperature color
-  function onLine(line) {
-    try {
-      var j = JSON.parse(line);
-      console.log("Received JSON: ",j);
-      elements.temperature.setValue(j.temperature);
-    } catch(e) {
-      console.log("Received: ",line);
-    }
-  }
-  var connection;
-  function connectDevice() {
-    tsbt.connect(function(c) {
-      if (!c) {
-        alert("Couldn't connect!");
-        return;
-      }
-      connection = c;
-      // remove modal window
-      elements.modal.remove();
-      // Handle the data we get back, and call 'onLine'
-      // whenever we get a line
-      var buf = "";
-      connection.on("data", function(d) {
-        buf += d;
-        var i = buf.indexOf("\n");
-        while (i>=0) {
-          onLine(buf.substr(0,i));
-          buf = buf.substr(i+1);
-          i = buf.indexOf("\n");
-        }
-      });
-      // First, reset tsbt.js
-      connection.write("LED1.set()", function() {
-        // Wait for it to reset itself
-        setTimeout(function() {
-          // Now tell it to write data on the current temperature level to Bluetooth
-          // 10 times a second. Also ensure that when disconnected, tsbt.js
-          // resets so the setInterval doesn't keep draining battery.
-          connection.write("setInterval(function(){Bluetooth.println(JSON.stringify({temperature:getVin()}));},500);NRF.on('disconnect', function() {reset()});\n",
-            function() { console.log("Ready..."); });
-          }, 1500);
-        });
-      });
+    var bank= "TS01";
+    var batt="0001";
+    var data = [];
+    for (var i=0;i<100;i++) data.push(Math.cos(i/10));
+    var o = {
+      l:TD.label({x:10,y:10,width:200,height:40,label:"TSBT CGO-KFV"}),
+      bk:TD.label({x:10,y:60,width:200,height:40,label:"Banco: " + bank}),
+      bt:TD.label({x:10,y:110,width:200,height:40,label:"Bateria: "+batt}),
+      v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
+      vs:TD.value({x:10,y:160,width:200,height:60,label:"Balanceamento",value:"3.9",min:3.0,step:0.05,max:3.9}),
+      bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
+      btn:TD.value({x:330,y:230,width:300,height:60,label:"alterar bateria",value:"1",min:1,step:1,max:200}),
+      ab:TD.toggle({x:10,y:300,width:200,height:100,label:"Ativar",value:1,name:"toggle"}),
+      s:TD.button({x:430,y:300,width:200,height:100,label:"Salvar",value:0,name:"buttonS",onchange:function(e){o.log.log(o.vs.opts.value );connection.write('Vbalance='+o.vs.opts.value+';\n isBalancing='+o.ab.opts.value+';\n')}}),
+      b:TD.button({x:220,y:300,width:200,height:100,label:"Localizar",value:0,name:"buttonL",onchange:function(e){connection.write('LED1.set();LED2.set();\n');}}),
+      t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
+      //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
+      log:TD.log({x:10,y:510,width:620,height:200,label:"Log",text:"conectado"}),
+      modal:TD.modal({x:10,y:10,width:340,height:340,label:"Clique para conectar",onchange:connectDevice})
+    };
+    //o.log.log("Olá");
+    
+    for (var i in o) document.body.appendChild(o[i]);
 
-  }
-  // Set up the controls we see on the screen    
-  var elements = {
-    heading : TD.label({x:10,y:10,width:190,height:50,label:"TSBT Dashboard"}),
-    temperature : TD.gauge({x:10,y:70,width:190,height:220,label:"Tensão da Bateria",value:0,min:0,max:100}),
-    modal: TD.modal({x:10,y:10,width:190,height:430,label:"Clique para conectar",onchange:connectDevice})
-  }
-  for (var i in elements)
-    document.body.appendChild(elements[i]);
+    
+    //TD.startEditor();
+
+function onLine(line) {
+//   o.log.log(line);
+   try {
+     var j = JSON.parse(line.substring(1));
+     o.log.log(line);
+     o.t.setValue(j.T);
+     o.v.setValue(j.V);
+     //o.bk.setValue(j.Bkn);
+     o.vs.setValue(j.Vb);
+     o.ab.setValue(j.isBal);
+     //o.bt.setValue(j.Btn);
+     o.bt.firstElementChild.innerText="Bateria: "+j.Btn
+     o.bk.firstElementChild.innerText="Banco: "+j.Bkn
+                   
+   } catch(e) {
+     //o.log.log("e/o na leitura: "+e);
+   }
+ }
+ var connection;
+ function connectDevice() {
+   tsbt.connect(function(c) {
+     if (!c) {
+       alert("Couldn't connect!");
+       return;
+     }
+     connection = c;
+     // remove modal window
+        o.modal.remove();
+     // Handle the data we get back, and call 'onLine'
+     // whenever we get a line
+     var buf = "";
+     connection.on("data", function(d) {
+       buf += d;
+       var i = buf.indexOf("\n");
+       while (i>=0) {
+         onLine(buf.substr(0,i));
+         buf = buf.substr(i+1);
+         i = buf.indexOf("\n");
+       }
+     });
+     // First, reset tsbt.js
+     connection.write("LED1.set();\n", function() {
+       // Wait for it to reset itself
+       o.log.log("Aguarde 10 segundos");
+       setTimeout(function() {
+         // Now tell it to write data on the current temperature level to Bluetooth
+         // 10 times a second. Also ensure that when disconnected, tsbt.js
+         // resets so the setInterval doesn't keep draining battery.
+         connection.write("int=setInterval(function(){Bluetooth.println(JSON.stringify({T:E.getTemperature(),V:getVin(),Vb:Vbalance,Bkn:bankName,Btn:battName,L:local,isBal:isBalancing}));},10000);NRF.on('disconnect', function() {LED1.reset();clearInterval(int);});\n",
+           function() { console.log("Lido..."); });
+         }, 1500);
+       });
+     });
+
+ }
   </script>
- </body>
-</html>
+
+</body></html>
