@@ -44,11 +44,10 @@ function onLine(line) {
      o.v.setValue(j.V);
      o.bk.setValue(j.Bkn);
      o.vs.setValue(j.Vb);
-     o.bk.setValue(j.Bkn);
      o.bt.setValue(j.Btn);
                    
    } catch(e) {
-     //o.log.log("erro na leitura: "+e);
+     o.log.log("erro na leitura: "+e);
    }
  }
  var connection;
