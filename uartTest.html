@@ -62,5 +62,13 @@
   </script>
   <button onclick="getTemperature()">Get Temperature</button>
   <span id="result"></span>
+
+  var elements = {
+    heading : TD.label({x:10,y:10,width:190,height:50,label:"TSBT Dashboard"}),
+    temperature : TD.gauge({x:10,y:70,width:190,height:220,label:"Tensão da Bateria",value:0,min:0,max:100}),
+    modal: TD.modal({x:10,y:10,width:190,height:430,label:"Clique para conectar",onchange:connectDevice})
+  }
+  for (var i in elements)
+    document.body.appendChild(elements[i]);
  </body>
 </html>
