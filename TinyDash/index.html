@@ -38,7 +38,7 @@
 function onLine(line) {
    o.log.log(line);
    try {
-     var j = JSON.parse(line);
+     var j = JSON.parse(line.substring(1));
      o.log.log("gravado");
      o.t.setValue(j.T);
      o.v.setValue(j.V);
