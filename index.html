@@ -11,7 +11,7 @@
     var bank= "TS01";
     var batt="0001";
     var data = [];
-    for (var i=0;i<100;i++) data.push(Math.cos(i/10));
+   // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
     var o = {
       l:TD.label({x:10,y:10,width:200,height:40,label:"TSBT CGO-KFV"}),
       bk:TD.label({x:10,y:60,width:200,height:40,label:"Banco: " + bank}),
@@ -32,8 +32,10 @@
     
     for (var i in o) document.body.appendChild(o[i]);
 
-    
-    //TD.startEditor();
+    document.getElementById("l").contentEditable = "true";
+    document.getElementById("bk").contentEditable = "true";
+    document.getElementById("bt").contentEditable = "true";
+//TD.startEditor();
 
 function onLine(line) {
 //   o.log.log(line);
