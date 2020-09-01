@@ -23,7 +23,7 @@
       vs:TD.value({x:10,y:160,width:220,height:60,label:"Balanceamento",value:"3.6",min:3.0,step:0.05,max:3.9}),
       //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
       btn:TD.value({x:10,y:280,width:220,height:60,label:"alterar bateria",value:"1",min:1,step:1,max:200}),
-      ab:TD.toggle({x:10,y:230,width:220,height:40,label:"Ativar",value:1,name:"toggle"}),
+      ab:TD.toggle({x:10,y:230,width:220,height:40,label:"Desativar                   Ativar",value:1,name:"toggle"}),
       s:TD.button({x:240,y:120,width:220,height:160,label:"Salvar",value:0,name:"buttonS",onchange:function(e){o.log.log(o.vs.opts.value );connection.write('Vbalance='+o.vs.opts.value+';\n isBalancing='+o.ab.opts.value+';\n')}}),
       b:TD.button({x:240,y:10,width:100,height:160,label:"Localizar",value:0,name:"buttonL",onchange:function(e){connection.write('LED1.set();LED2.set();\n');}}),
       d:TD.button({x:240,y:290,width:220,height:160,label:"Desconectar",value:0,name:"buttonD",onchange:function(e){connectDevice;}}),
