@@ -73,7 +73,7 @@ function onLine(line) {
  function connectDevice() {
    tsbt.connect(function(c) {
      if (!c) {
-       alert("Couldn't connect!");
+       alert("Desconectado!");
        return;
      }
      connection = c;
