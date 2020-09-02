@@ -9,7 +9,7 @@
   <script src="https://bms-tsbt.github.io/configura/tsbt.js"></script>  
   <script>
     var bank= "TSBT";
-    var batt=1;
+    var batt=0;
     var data = [];
    // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
     var o = {
@@ -24,7 +24,7 @@
       vb:TD.value({x:240,y:60,width:170,height:60,label:"tensão",value:"3.6",min:3.0,step:0.05,max:3.9}),
       ib:TD.value({x:240,y:110,width:170,height:60,label:"corrente",value:"200",min:50,step:50,max:600}),
       //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
-      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:1,step:1,max:200}),
+      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:0,step:1,max:200}),
       ab:TD.toggle({x:240,y:180,width:170,height:90,label:"Desativar <-----------> Ativar",value:1,name:"toggle"}),
       s:TD.button({x:82,y:180,width:65,height:90,label:".Verificar",value:0,name:"buttonS",onChange: writeThings()}),
       b:TD.button({x:10,y:180,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{connection.write('LED1.set();LED2.set();\n');}catch{}}}),
