@@ -25,7 +25,7 @@
       ib:TD.value({x:240,y:110,width:170,height:60,label:"corrente",value:"200",min:50,step:50,max:600}),
       //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
       btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:1,step:1,max:200}),
-      ab:TD.toggle({x:240,y:180,width:170,height:90,label:"Desativar <----------------> Ativar",value:1,name:"toggle"}),
+      ab:TD.toggle({x:240,y:180,width:170,height:90,label:"Desativar <------------> Ativar",value:1,name:"toggle"}),
       s:TD.button({x:10,y:180,width:65,height:90,label:".. Salvar",value:0,name:"buttonS",onChange: function(e){try{connection.write('Vbalance='+o.vs.opts.value+';\n isBalancing='+o.ab.opts.value+';\n')}catch(e){}}}),
       b:TD.button({x:84,y:180,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{connection.write('LED1.set();LED2.set();\n');}catch{}}}),
       d:TD.button({x:158,y:180,width:75,height:90,label:"Reconectar",value:0,name:"buttonD",onchange:function(e){try{connection.write('save();\n');connection.close();document.body.appendChild(o.modal)}catch(e){}}}),
@@ -48,18 +48,19 @@ function onLine(line) {
    try {
      var j = JSON.parse(line.substring(1));
      o.log.log(line);
-     o.t.setValue(j.T);
-     o.v.setValue(j.V);
+     //o.t.setValue(j.T);
+     //o.v.setValue(j.V);
      //o.bk.setValue(j.Bkn);
-     o.vs.firstElementChild.innerText="Balanceamento: "+j.Vb;
+     (j.TStype?j.TStype:o.vs.firstElementChild.innerText="Balanceamento: "+j.Vb,"");
+     (j.TStype?j.TStype:o.ib.firstElementChild.innerText="Balanceamento: "+j.Ibal,"");
      //o.ab.setValue(j.isBal);
      //o.bt.setValue(j.Btn);
-     o.bt.firstElementChild.innerText="Bateria: "+j.Btn
-     o.bk.firstElementChild.innerText="Banco: "+j.Bkn
+     //o.bt.firstElementChild.innerText="Bateria: "+j.Btn
+     //o.bk.firstElementChild.innerText="Banco: "+j.Bkn
      o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT")+"  "+j.L
                    
    } catch(e) {
-     o.log.log("e/o na leitura: "+e);
+     //o.log.log("e/o na leitura: "+e);
    }
  }
  var connection;
@@ -92,7 +93,7 @@ function onLine(line) {
          // Now tell it to write data on the current temperature level to Bluetooth
          // 10 times a second. Also ensure that when disconnected, tsbt.js
          // resets so the setInterval doesn't keep draining battery.
-         connection.write("int=setInterval(function(){Bluetooth.println(JSON.stringify({V:getVin(),T:E.getTemperature(),Vb:Vbalance,Bkn:bankName,Btn:battName,L:local,isBal:isBalancing,TStype:TStype,Vrs:version}));},2000);NRF.on('disconnect', function() {LED1.reset();clearInterval(int);});\n",
+         connection.write("int=setInterval(function(){Bluetooth.println(JSON.stringify({V:getVin(),T:E.getTemperature(),Vb:Vbalance,Bkn:bankName,Btn:battName,L:local,isBal:isBalancing,Ibal:Ibalance,TStype:TStype,Vrs:version}));},2000);NRF.on('disconnect', function() {LED1.reset();clearInterval(int);});\n",
            function() { console.log("Lido..."); });
          }, 1500);
        });
