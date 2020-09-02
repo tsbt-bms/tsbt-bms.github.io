@@ -47,15 +47,16 @@ function onLine(line) {
 //   o.log.log(line);
    try {
      var j = JSON.parse(line.substring(1));
-     //o.log.log(line);
-     //o.t.setValue(j.T);
-     //o.v.setValue(j.V);
+     o.log.log(line);
+     o.t.setValue(j.T);
+     o.v.setValue(j.V);
      //o.bk.setValue(j.Bkn);
-     o.vs.setValue(j.Vb);
-     o.ab.setValue(j.isBal);
+     o.vs.firstElementChild.innerText="Balanceamento: "+j.Vb;
+     //o.ab.setValue(j.isBal);
      //o.bt.setValue(j.Btn);
-     o.bte.firstElementChild.innerText=j.Btn
-     o.bke.firstElementChild.innerText=j.Bkn
+     o.bt.firstElementChild.innerText="Bateria: "+j.Btn
+     o.bk.firstElementChild.innerText="Banco: "+j.Bkn
+     o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT")+"  "+j.L
                    
    } catch(e) {
      //o.log.log("e/o na leitura: "+e);
@@ -65,7 +66,7 @@ function onLine(line) {
  function connectDevice() {
    tsbt.connect(function(c) {
      if (!c) {
-       alert("Não foi possível conectar!");
+       alert("Couldn't connect!");
        return;
      }
      connection = c;
@@ -73,11 +74,31 @@ function onLine(line) {
         o.modal.remove();
      // Handle the data we get back, and call 'onLine'
      // whenever we get a line
-     
+     var buf = "";
+     connection.on("data", function(d) {
+       buf += d;
+       var i = buf.indexOf("\n");
+       while (i>=0) {
+         onLine(buf.substr(0,i));
+         buf = buf.substr(i+1);
+         i = buf.indexOf("\n");
+       }
+     });
+     // First, reset tsbt.js
+     connection.write("LED1.set();\n", function() {
+       // Wait for it to reset itself
+       //o.log.log("Aguarde 2 segundos");
+       setTimeout(function() {
+         // Now tell it to write data on the current temperature level to Bluetooth
+         // 10 times a second. Also ensure that when disconnected, tsbt.js
+         // resets so the setInterval doesn't keep draining battery.
+         connection.write("int=setInterval(function(){Bluetooth.println(JSON.stringify({V:getVin(),T:E.getTemperature(),Vb:Vbalance,Bkn:bankName,Btn:battName,L:local,isBal:isBalancing,TStype:TStype,Vrs:version}));},2000);NRF.on('disconnect', function() {LED1.reset();clearInterval(int);});\n",
+           function() { console.log("Lido..."); });
+         }, 1500);
        });
+     });
 
- }
-    
+ } 
   </script>
 
 </body></html>
