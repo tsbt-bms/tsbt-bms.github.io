@@ -31,7 +31,7 @@
       d:TD.button({x:160,y:180,width:75,height:90,label:"Reconectar",value:0,name:"buttonD",onchange:function(e){try{connection.write('save();\n');connection.close();document.body.appendChild(o.modal)}catch(e){}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
-      log:TD.log({x:10,y:380,width:620,height:200,label:"Log",text:"conectado"}),
+      log:TD.log({x:10,y:190,width:380,height:200,label:"Log",text:"conectado"}),
       modal:TD.modal({x:10,y:410,width:340,height:460,label:"Clique para conectar",onchange:connectDevice})
     };
     //o.log.log("Olá");
