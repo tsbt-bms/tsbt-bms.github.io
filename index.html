@@ -31,7 +31,7 @@
       d:TD.button({x:155,y:180,width:75,height:90,label:"-> Salvar",value:0,name:"buttonD",onchange:function(e){try{writeThings();connection.write('clearInterval(int)\n;save();\n');connection.close();document.body.appendChild(o.modal)}catch(e){alert(e);}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
-      log:TD.log({x:10,y:280,width:400,height:200,label:"Log",text:"conectado"}),
+      log:TD.log({x:10,y:280,width:400,height:200,label:"Log",text:"conectando"}),
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar",onchange:connectDevice})
     };
     //o.log.log("Olá");
