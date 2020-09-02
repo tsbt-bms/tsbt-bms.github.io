@@ -65,7 +65,8 @@ function onLine(line) {
      (j.TStype!='TSGW'?o.ab.setValue(j.isBal):0);
      (j.TStype!='TSGW'?o.vb.setValue(j.Vb):0);
      (j.TStype!='TSGW'?o.ib.setValue((j.Ibal?j.Ibal:200)):""); 
-     (j.TStype!='TSGW'?o.btn.setValue((isSafeInteger(j.Btn)?j.Btn:0)):"");                 
+     (j.TStype!='TSGW'?o.btn.setValue((isSafeInteger(j.Btn)?j.Btn:0)):"");   
+     o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT")
    } catch(e) {
      o.log.log(e);
    }
