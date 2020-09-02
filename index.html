@@ -63,7 +63,7 @@ function onLine(line) {
      o.log.log(line);
      (j.TStype!='TSGW'?o.ab.setValue(j.isBal):0);
      (j.TStype!='TSGW'?o.vb.setValue(j.Vb):0);
-     (j.TStype!='TSGW'?o.ib.setValue((j.Ibal?j.Ibal:200):200)); 
+     (j.TStype!='TSGW'?o.ib.setValue((j.Ibal?j.Ibal:200)):""); 
      (j.TStype!='TSGW'?o.btn.setValue((isNumeric(j.Btn)?j.Btn:0)):"");                 
    } catch(e) {
      o.log.log(e);
