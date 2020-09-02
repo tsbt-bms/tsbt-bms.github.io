@@ -50,9 +50,9 @@ function writeThings (){
   Vbalance='+o.vb.opts.value+';\n \
   Ibalance='+o.ib.opts.value+';\n \
   isBalancing='+o.ab.opts.value+';\n \
-  save()\n;
-')}catch(e){
-       o.log(e);     };
+  save()\n;')
+  }catch(e){
+   o.log(e);     };
  }
     
     
@@ -61,10 +61,10 @@ function onLine(line) {
    try {
      var j = JSON.parse(line.substring(1));
      o.log.log(line);
-     (j.TStype!='TSGW'?o.ab.setValue(j.isBal),"");
-     (j.TStype!='TSGW'?o.vb.setValue(j.Vb),"");
-     (j.TStype!='TSGW'?o.ib.setValue(j.Ibal),""); 
-     (j.TStype!='TSGW'?o.btn.setValue(j.Btn),"");                 
+     (j.TStype!='TSGW'?o.ab.setValue(j.isBal):"");
+     (j.TStype!='TSGW'?o.vb.setValue(j.Vb):"");
+     (j.TStype!='TSGW'?o.ib.setValue(j.Ibal):""); 
+     (j.TStype!='TSGW'?o.btn.setValue(j.Btn):"");                 
    } catch(e) {
      o.log.log(e);
    }
