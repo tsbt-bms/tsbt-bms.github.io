@@ -26,7 +26,7 @@
       //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
       btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:1,step:1,max:200}),
       ab:TD.toggle({x:240,y:180,width:170,height:90,label:"Desativar <-----------> Ativar",value:1,name:"toggle"}),
-      s:TD.button({x:10,y:158,width:65,height:90,label:".. Salvar",value:0,name:"buttonS",onChange: writeThings(o)}),
+      s:TD.button({x:10,y:158,width:65,height:90,label:".. Salvar",value:0,name:"buttonS",onChange: writeThings()}),
       b:TD.button({x:84,y:180,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{connection.write('LED1.set();LED2.set();\n');}catch{}}}),
       d:TD.button({x:10,y:180,width:75,height:90,label:"Reconectar",value:0,name:"buttonD",onchange:function(e){try{connection.close();document.body.appendChild(o.modal)}catch(e){}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
@@ -42,7 +42,7 @@
     o.bke.contentEditable = "true";
    
 //TD.startEditor();
-function writeThings (o){
+function writeThings (){
   try {connection.write('\
   local='+o.vb.opts.value+';\n \
   bankName='+o.bke.opts.value+';\n \
@@ -52,7 +52,7 @@ function writeThings (o){
   isBalancing='+o.ab.opts.value+';\n \
   save()\n;')
   }catch(e){
-   o.log.log(e);     };
+   console.log(e);     };
  }
     
     
@@ -66,7 +66,7 @@ function onLine(line) {
      (j.TStype!='TSGW'?o.ib.setValue(j.Ibal):""); 
      (j.TStype!='TSGW'?o.btn.setValue(j.Btn):"");                 
    } catch(e) {
-     //o.log.log(e);
+     console.log(e);
    }
  }
  var connection;
