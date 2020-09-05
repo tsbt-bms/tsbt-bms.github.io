@@ -43,7 +43,8 @@
    
 //TD.startEditor();
 function writeThings (){
- r= tsbt.eval("prm",(r)=>{
+  try{
+    r= tsbt.eval("prm",(r)=>{
     r.L=o.le.opts.value;
     r.Bkn=bke.opts.value;
     r.Btn=btn.opts.value;
@@ -52,37 +53,18 @@ function writeThings (){
     r.isBal=o.ab.opts.value;
     return r
     });
-  tsbt.eval('updatePrmStorage('+r+');\
-    local = '+ r.L +' ;\
-    bankName= '+ r.Bkn + ';\
-    battName = '+ rm.Btn + ';\
-    Vbalance = '+ r.Vb + ';\
-    Ibalance = ' + r.Ibal + ';\
-    isBalancing = ' + r.isBal + ';',
-    (rt)=>{return rt}) 
-  } 
-
-  prm=require("Storage").readJSON('prm',true)||{};
-
-  TStype=prm.TStype||"TSBT";
-  version=prm.Vrs||"1.1.0";
-  battName = prm.Btn||NRF.getAddress().slice(-5);
-
-  Vbalance =prm.Vb||3.65;
-  Vbalance_min =prm.Vbmin||3.65; 
-  offsetV = prm.offsetV||0.0;
-
-  Ibank_max= prm.Ibmax||200;
-
-  
-  isCurrentSensorBoard= prm.isSB||false;
+    tsbt.eval('updatePrmStorage('+r+');\
+      local = '+ r.L +' ;\
+      bankName= '+ r.Bkn + ';\
+      battName = '+ rm.Btn + ';\
+      Vbalance = '+ r.Vb + ';\
+      Ibalance = ' + r.Ibal + ';\
+      isBalancing = ' + r.isBal + ';',
+      (rt)=>{return rt})  
+  } catch (e) {
+    console.log(e);
+  }
  
-  Vmax=prm.Vmax||3.9;
-  Vmin=prm.Vmin||2.5;
-  Tmax=prm.Tmax||50;
-  Tmin=prm.Tmin||0;
-
-    
     
 function onLine(line) {
 //   o.log.log(line);
