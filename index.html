@@ -43,13 +43,14 @@
    
 //TD.startEditor();
 function writeThings (){
-  tsbt.eval("prm",(r)=>{
+ r= tsbt.eval("prm",(r)=>{
     r.L=o.le.opts.value;
     r.Bkn=bke.opts.value;
     r.Btn=btn.opts.value;
     r.Vb=o.vb.opts.value;
     r.Ibal=o.ib.opts.value;
     r.isBal=o.ab.opts.value;
+    return r
     });
   tsbt.eval('updatePrmStorage('+r+');\
     local = '+ r.L +' ;\
