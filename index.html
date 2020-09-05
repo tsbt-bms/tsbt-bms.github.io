@@ -62,7 +62,11 @@ function writeThings (){
       isBalancing = ' + r.isBal + ';',
       (rt)=>{return rt})  
   } catch (e) {
-    console.log(e);
+    try{
+      o.log.log(e);
+    }catch(e){
+      console.log(e);
+    }
   }
 } 
     
