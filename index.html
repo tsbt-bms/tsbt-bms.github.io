@@ -31,7 +31,7 @@
       d:TD.button({x:155,y:180,width:75,height:90,label:"-> Salvar",value:0,name:"buttonD",onchange:function(e){try{writeThings();connection.write('clearInterval(int)\n;');connection.close();document.body.appendChild(o.modal)}catch(e){alert(e);}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
-      log:TD.log({x:10,y:280,width:400,height:200,label:"Log",text:"conectado"}),
+      log:TD.log({x:10,y:280,width:400,height:200,label:"Log",text:"conectando"}),
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar",onchange:connectDevice})
     };
     //o.log.log("Olá");
@@ -50,17 +50,16 @@ function writeThings (){
     r.Vb=o.vb.opts.value;
     r.Ibal=o.ib.opts.value;
     r.isBal=o.ab.opts.value;
-
-    tsbt.eval('updatePrmStorage('+r+');\
+    });
+  tsbt.eval('updatePrmStorage('+r+');\
     local = '+ r.L +' ;\
     bankName= '+ r.Bkn + ';\
     battName = '+ rm.Btn + ';\
     Vbalance = '+ r.Vb + ';\
     Ibalance = ' + r.Ibal + ';\
     isBalancing = ' + r.isBal + ';',
-    (rt)=>{return rt})
-  }
-}
+    (rt)=>{return rt}) 
+  } 
 
   prm=require("Storage").readJSON('prm',true)||{};
 
@@ -92,9 +91,10 @@ function onLine(line) {
      (j.TStype!='TSGW'?o.ab.setValue(j.isBal):0);
      (j.TStype!='TSGW'?o.vb.setValue(j.Vb):0);
      (j.TStype!='TSGW'?o.ib.setValue((j.Ibal?j.Ibal:200)):""); 
-     (j.TStype!='TSGW'?o.btn.setValue((isSafeInteger(j.Btn)?j.Btn:0)):"");                 
+     (j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
+     o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT")
    } catch(e) {
-     //o.log.log(e);
+     o.log.log(e);
    }
  }
  var connection;
@@ -122,7 +122,7 @@ function onLine(line) {
      // First, reset tsbt.js
      connection.write("LED1.set();\n", function() {
        // Wait for it to reset itself
-       //o.log.log("Aguarde 2 segundos");
+       o.log.log("Aguarde até 10 segundos");
        setTimeout(function() {
          // Now tell it to write data on the current temperature level to Bluetooth
          // 10 times a second. Also ensure that when disconnected, tsbt.js
