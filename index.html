@@ -40,11 +40,11 @@
 
     o.le.contentEditable = "true";
     o.bke.contentEditable = "true";
-   
+
 //TD.startEditor();
 function writeThings (){
   try{o.log.log("writeThings called");}
-  catch(e){};
+  catch(e){}
   try{
     r= tsbt.eval("prm",(r)=>{
     r.L=o.le.opts.value;
@@ -54,16 +54,17 @@ function writeThings (){
     r.Ibal=o.ib.opts.value;
     r.isBal=o.ab.opts.value;
     o.o.log("prepare new values "+r);
-    return r
+    return r;
     });
-    tsbt.eval('arg='+JSON.stringify(r)+'\n updatePrmStorage(arg))\n \
-      local = "'+ r.L +'"\n \
-      bankName=" '+ r.Bkn + '"\n \
-      battName =" '+ rm.Btn + '"\n\
-      Vbalance =" ' + r.Vb + '"\n \
-      Ibalance =" ' + r.Ibal + '"\n \
-      isBalancing =" ' + r.isBal + '"\n',
-      (rt)=>{o.log.log("updatePrmStorage");return rt})  
+    tsbt.eval("arg='+JSON.stringify(r)+'\n \
+      updatePrmStorage(arg)\n \
+      local = '+ arg.L +'\n \
+      bankName= '+ arg.Bkn + '\n \
+      battName ='+ argm.Btn +'\n \
+      Vbalance =' + arg.Vb + '\n \
+      Ibalance =' + arg.Ibal + '\n \
+      isBalancing =' + arg.isBal +'\n",
+      (rt)=>{o.log.log("updatePrmStorage");return rt;});  
   } catch (e) {
     try{
       o.log.log(e);
@@ -72,6 +73,7 @@ function writeThings (){
     }
   }
 } 
+ 
     
 function onLine(line) {
 //   o.log.log(line);
