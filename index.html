@@ -43,7 +43,8 @@
    
 //TD.startEditor();
 function writeThings (){
-  o.log.log("writeThings called");
+  try{o.log.log("writeThings called");}
+  catch(e){};
   try{
     r= tsbt.eval("prm",(r)=>{
     r.L=o.le.opts.value;
