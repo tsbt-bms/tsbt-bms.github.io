@@ -53,13 +53,13 @@ function writeThings (){
     r.isBal=o.ab.opts.value;
     return r
     });
-    tsbt.eval('updatePrmStorage('+r+');\
-      local = '+ r.L +' ;\
-      bankName= '+ r.Bkn + ';\
-      battName = '+ rm.Btn + ';\
-      Vbalance = '+ r.Vb + ';\
-      Ibalance = ' + r.Ibal + ';\
-      isBalancing = ' + r.isBal + ';',
+    tsbt.eval('arg='+JSON.stringify(r)+'\n updatePrmStorage(arg))\n \
+      local = "'+ r.L +'"\n \
+      bankName=" '+ r.Bkn + '"\n \
+      battName =" '+ rm.Btn + '"\n\
+      Vbalance =" ' + r.Vb + '"\n \
+      Ibalance =" ' + r.Ibal + '"\n \
+      isBalancing =" ' + r.isBal + '"\n',
       (rt)=>{return rt})  
   } catch (e) {
     try{
