@@ -1,4 +1,7 @@
-/* Copyright 2020 Gordon Williams, gw@pur3.co.uk
+/*
+--------------------------------------------------------------------
+
+Copyright 2020 Gordon Williams, gw@pur3.co.uk
    https://github.com/espruino/EspruinoWebTools
 */
 (function (root, factory) {
