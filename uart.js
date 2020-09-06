@@ -235,7 +235,7 @@ Copyright 2020 Gordon Williams, gw@pur3.co.uk
       navigator.serial.requestPort({}).then(function(port) {
         log(1, "Connecting to serial port");
         serialPort = port;
-        return port.open({ baudrate: 115200 });
+        return port.open({ baudrate: 9600 });
       }).then(function () {
         function readLoop() {
           var reader = serialPort.readable.getReader();
