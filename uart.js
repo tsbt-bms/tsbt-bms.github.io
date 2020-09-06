@@ -277,7 +277,7 @@ Copyright 2020 Gordon Williams, gw@pur3.co.uk
           callback();
         }).catch(function(error) {
           log(0,'SEND ERROR: ' + error);
-          closeSerial();
+          serialPort.close();
         });
         writer.releaseLock();
       };
