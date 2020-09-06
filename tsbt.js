@@ -7,15 +7,15 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
 file, You can obtain one at http://mozilla.org/MPL/2.0/.
 --------------------------------------------------------------------
-This creates a 'tsbt' object that can be used from the Web Browser.
+This creates a 'TSBT' object that can be used from the Web Browser.
 
 Simple usage:
 
-  tsbt.write("LED1.set()\n")
+  TSBT.write("LED1.set()\n")
 
 Execute expression and return the result:
 
-  tsbt.eval("BTN.read()", function(d) {
+  TSBT.eval("BTN.read()", function(d) {
     alert(d);
   });
 
@@ -23,7 +23,7 @@ Or write and wait for a result - this will return all characters,
 including echo and linefeed from the REPL so you may want to send
 `echo(0)` and use `console.log` when doing this.
 
-  tsbt.write("1+2\n", function(d) {
+  TSBT.write("1+2\n", function(d) {
     alert(d);
   });
 
@@ -51,7 +51,7 @@ Or more advanced usage with control of the connection
         module.exports = factory();
     } else {
         // Browser globals (root is window)
-        root.tsbt = factory();
+        root.TSBT = factory();
     }
 }(typeof self !== 'undefined' ? self : this, function () {
 
@@ -69,7 +69,7 @@ Or more advanced usage with control of the connection
         ) {
       console.warn("Chrome <56 no Windows não oferece suporte adequado para web bluetooth");
       if (confirm("Web Bluetooth no Windows não está disponível.\nClique Ok para outras opções"))
-        window.location = "https://tsbt-srpvsp.github.io/tsbt-admin/tsbt.js+Quick+Start";
+        window.location = "tsbt.js+Quick+Start";
       return false;
     }
     if (navigator.bluetooth) return true;
@@ -80,7 +80,7 @@ Or more advanced usage with control of the connection
         window.location = "https://itunes.apple.com/us/app/webble/id1193531073";
     } else {
       if (confirm("Esse browser não suporta Web Bluetooth.\nClique OK para instruções e habilitá-lo."))
-        window.location = "https://tsbt-srpvsp.github.io/tsbt-admin/tsbt.js+Quick+Start";
+        window.location = "tsbt.js+Quick+Start";
     }
     return false;
   }

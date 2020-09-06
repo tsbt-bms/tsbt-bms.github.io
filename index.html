@@ -8,7 +8,7 @@
   <script src="TinyDash/tinydash_editor.js"></script>
 <!--  <script src="tsbt.js"></script>  -->
   <script src="uart.js"></script> 
-  <script> var tsbt= uart; </script>
+  <script> var TSBT=UART; </script>
 
   <script>
     var bank= "TSBT";
@@ -49,7 +49,7 @@ function writeThings (){
   try{o.log.log("writeThings called");}
   catch(e){}
     try{
-    r= tsbt.eval("prm",(r)=>{
+    r= TSBT.eval("prm",(r)=>{
     r.L=o.le.opts.value;
     r.Bkn=bke.opts.value;
     r.Btn=btn.opts.value;
@@ -59,7 +59,7 @@ function writeThings (){
     o.o.log("prepare new values "+r);
     return r;
     });
-    tsbt.eval("arg='+JSON.stringify(r)+'\n \
+    TSBT.eval("arg='+JSON.stringify(r)+'\n \
       updatePrmStorage(arg)\n \
       local = '+ arg.L +'\n \
       bankName= '+ arg.Bkn + '\n \
@@ -94,7 +94,7 @@ function onLine(line) {
  }
  var connection;
  function connectDevice() {
-   tsbt.connect(function(c) {
+   TSBT.connect(function(c) {
      if (!c) {
        alert("Desconectado!");
        return;
