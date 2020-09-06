@@ -141,14 +141,7 @@
 
       navigator.bluetooth.requestDevice({
           filters:[
-            { namePrefix: 'Puck.js' },
-            { namePrefix: 'Pixl.js' },
-            { namePrefix: 'MDBT42Q' },
-            { namePrefix: 'Bangle' },
-            { namePrefix: 'RuuviTag' },
-            { namePrefix: 'iTracker' },
-            { namePrefix: 'Thingy' },
-            { namePrefix: 'Espruino' },
+            { namePrefix: 'TS' },
             { services: [ NORDIC_SERVICE ] }
           ], optionalServices: [ NORDIC_SERVICE ]}).then(function(device) {
         log(1, 'Device Name:       ' + device.name);
