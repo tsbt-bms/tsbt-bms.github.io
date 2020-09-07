@@ -62,7 +62,7 @@ function writeThings (){
     arg=JSON.stringify(prm);
 
 
-    connection.write("updatePrmStorage("+arg+")\n \
+    connection.write("updatePrmStorage('prm',"+arg+")\n \
       local = "+ prm.L +"\n \
       bankName= "+ prm.Bkn + "\n \
       battName ="+ prm.Btn +"\n \
