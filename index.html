@@ -83,7 +83,8 @@ function writeThings (){
 function onLine(line) {
    //o.log.log(line);
    try {
-     var j = JSON.parse(line.slice(line.indexOf("{")));
+    var patt = new RegExp("{.*}");
+     var j = JSON.parse(patt.exec(line));
      o.log.log(JSON.stringify(j));
      prm=j;
      (j.TStype!='TSGW'?o.ab.setValue(j.isBal):0);
