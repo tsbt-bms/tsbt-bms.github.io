@@ -47,7 +47,7 @@ var prm={};
 //TD.startEditor();
 function writeThings (){
   try{o.log.log("writeThings called");}
-  catch(e){}
+  catch(e){console.log(e);}
     try{
     connection.write("prm\n",(r)=>{
     o.o.log("prepare new values "+r);
