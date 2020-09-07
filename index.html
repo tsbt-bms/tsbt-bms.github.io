@@ -53,8 +53,8 @@ function writeThings (){
     o.o.log("prepare new values "+r);
     return r;
     });
-    prm.L=o.le.opts.value;
-    prm.Bkn=o.bke.opts.value;
+    prm.L=o.le.label;
+    prm.Bkn=o.bke.opts.label;
     prm.Btn=o.btn.opts.value;
     prm.Vb=o.vb.opts.value;
     prm.Ibal=o.ib.opts.value;
@@ -83,7 +83,7 @@ function writeThings (){
 function onLine(line) {
    o.log.log(line);
    try {
-     var j = JSON.parse(line.slice(str.indexOf("{")));
+     var j = JSON.parse(line.slice(line.indexOf("{")));
      o.log.log(j);
      prm=j;
      (j.TStype!='TSGW'?o.ab.setValue(j.isBal):0);
