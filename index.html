@@ -81,17 +81,21 @@ function writeThings (){
  
     
 function onLine(line) {
-   //o.log.log(line);
+   o.log.log(line);
    try {
     var patt = new RegExp("{.*}");
      var j = JSON.parse(patt.exec(line));
-     o.log.log(JSON.stringify(j));
-     prm=j;
-     (j.TStype!='TSGW'?o.ab.setValue(j.isBal):0);
-     (j.TStype!='TSGW'?o.vb.setValue(j.Vb):0);
-     (j.TStype!='TSGW'?o.ib.setValue((j.Ibal?j.Ibal:200)):""); 
-     //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
-     o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT")
+     if (j){
+          o.log.log(JSON.stringify(j));
+          prm=j;
+          (j.TStype!='TSGW'?o.ab.setValue(j.isBal):0);
+          (j.TStype!='TSGW'?o.vb.setValue(j.Vb):0);
+          (j.TStype!='TSGW'?o.ib.setValue((j.Ibal?j.Ibal:200)):""); 
+          //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
+          o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT")
+
+     }
+
    } catch(e) {
     // o.log.log(e);
    }
