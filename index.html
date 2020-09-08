@@ -44,6 +44,7 @@
     o.le.contentEditable = "true";
     o.bke.contentEditable = "true";
 var prm={};
+var arg="";
 //TD.startEditor();
 function writeThings (){
   try{o.log.log("writeThings called");}
@@ -82,7 +83,7 @@ function writeThings (){
  
     
 function onLine(line) {
-   o.log.log(line);
+   //o.log.log(line);
    try {
     var patt = new RegExp("{.*}");
      var j = JSON.parse(patt.exec(line));
