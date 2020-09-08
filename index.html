@@ -59,13 +59,14 @@ function writeThings (){
         prm.isBal=o.ab.opts.value;
         arg=JSON.stringify(prm);
         connection.write("reset()\n",()=>{
-        connection.write("updatePrmStorage('prm',"+arg+")\n \
+        connection.write("\
             local = "+ prm.L +"\n \
             bankName= "+ prm.Bkn + "\n \
             battName ="+ prm.Btn +"\n \
             Vbalance =" + prm.Vb + "\n \
             Ibalance =" + prm.Ibal + "\n \
-            isBalancing =" + prm.isBal +"\n",
+            isBalancing =" + prm.isBal +"\n \
+            restorePrm() \n",
             (rt)=>{o.log.log("salvo");})});
   } catch (e) {
     try{
