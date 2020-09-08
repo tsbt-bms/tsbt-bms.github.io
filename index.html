@@ -47,8 +47,8 @@ var prm={};
 //TD.startEditor();
 function writeThings (){
   try{o.log.log("writeThings called");}
-  catch(e){console.log(e);}
-    try{
+  catch(e){console.log("writeThings called  " + e );}
+  try{
     connection.write("print(JSON.stringify(prm))\n",(r)=>{
     o.o.log("prepare new values "+r);
     return r;
@@ -74,7 +74,7 @@ function writeThings (){
     try{
       o.log.log(e);
     }catch(e){
-      console.log(e);
+      console.log("connection write "+ e);
     }
   }
 } 
