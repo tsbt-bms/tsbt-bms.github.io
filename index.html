@@ -50,31 +50,27 @@ var prm={};
 var arg="";
 //TD.startEditor();
 function writeThings (){
-  try{o.log.log("salvando ...");}
-  catch(e){console.log("erro ao salvar  " + e );}
   try{
     connection.write("print(JSON.stringify(prm))\n",(r)=>{
-    o.o.log("preparando valores "+r);
-    return r;
+        prm.L='"'+o.le.innerText+'"';
+        prm.Bkn='"'+o.bke.innerText+'"';
+        prm.Btn=o.btn.opts.value;
+        prm.Vb=o.vb.opts.value;
+        prm.Ibal=o.ib.opts.value;
+        prm.isBal=o.ab.opts.value;
+        arg=JSON.stringify(prm);
+        o.o.log("preparando valores "+r);
+        int2=setInterval(
+        connection.write("updatePrmStorage('prm',"+arg+")\n \
+            local = "+ prm.L +"\n \
+            bankName= "+ prm.Bkn + "\n \
+            battName ="+ prm.Btn +"\n \
+            Vbalance =" + prm.Vb + "\n \
+            Ibalance =" + prm.Ibal + "\n \
+            isBalancing =" + prm.isBal +"\n",
+            (rt)=>{o.log.log("salvo"+ rt);})  ,500)
     });
-    prm.L='"'+o.le.innerText+'"';
-    prm.Bkn='"'+o.bke.innerText+'"';
-    prm.Btn=o.btn.opts.value;
-    prm.Vb=o.vb.opts.value;
-    prm.Ibal=o.ib.opts.value;
-    prm.isBal=o.ab.opts.value;
-    arg=JSON.stringify(prm);
-    console.log("arg  "+ arg);
 
-
-    connection.write("updatePrmStorage('prm',"+arg+")\n \
-      local = "+ prm.L +"\n \
-      bankName= "+ prm.Bkn + "\n \
-      battName ="+ prm.Btn +"\n \
-      Vbalance =" + prm.Vb + "\n \
-      Ibalance =" + prm.Ibal + "\n \
-      isBalancing =" + prm.isBal +"\n",
-      (rt)=>{o.log.log("salvo"+ rt);});  
   } catch (e) {
     try{
       o.log.log(e);
