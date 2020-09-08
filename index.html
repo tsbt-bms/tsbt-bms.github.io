@@ -60,6 +60,7 @@ function writeThings (){
     prm.Ibal=o.ib.opts.value;
     prm.isBal=o.ab.opts.value;
     arg=JSON.stringify(prm);
+    console.log("arg  "+ arg);
 
 
     connection.write("updatePrmStorage('prm',"+arg+")\n \
