@@ -62,7 +62,7 @@
       ab:TD.toggle({x:240,y:180,width:170,height:90,label:"Desativar <-----------> Ativar",value:1,name:"toggle"}),
       b:TD.button({x:10,y:180,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{connection.write('LED1.set();LED2.set();Res=1;\n');}catch(e){alert(e);}}}),
       s:TD.button({x:82,y:180,width:65,height:90,label:"- Salvar",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
-      d:TD.button({x:155,y:180,width:75,height:90,label:"-> Sair",value:0,name:"buttonD",onchange:function(e){try{writeThings();connection.close((x)=>{x;});document.body.appendChild(o.modal);}catch(e){alert(e);}}}),
+      d:TD.button({x:155,y:180,width:75,height:90,label:"-> Sair",value:0,name:"buttonD",onchange:function(e){try{connection.close((x)=>{x;});document.body.appendChild(o.modal);}catch(e){alert(e);}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
       log:TD.log({x:10,y:280,width:400,height:200,label:"Log",text:"conectando"}),
