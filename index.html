@@ -132,7 +132,7 @@ function onLine(line) {
          // Now tell it to write data on the current temperature level to Bluetooth
          // 10 times a second. Also ensure that when disconnected, tsbt.js
          // resets so the setInterval doesn't keep draining battery.
-         connection.write("int=setInterval(function(){print(JSON.stringify({V:getVin(),T:E.getTemperature(),Vb:Vbalance,Bkn:bankName,Btn:battName,L:local,isBal:isBalancing,Ibal:Ibalance,TStype:TStype,Vrs:version}));},15000);NRF.on('disconnect', function() {LED1.set();clearInterval(int);});\n",
+         connection.write("int=setInterval(function(){print(JSON.stringify({V:getVin(),T:E.getTemperature(),Vb:Vbalance,Bkn:bankName,Btn:battName,L:local,isBal:isBalancing,Ibal:Ibalance,TStype:TStype,Vrs:version}));},5000);NRF.on('disconnect', function() {LED1.set();clearInterval(int);});\n",
            function() { console.log("Lido..."); });
          }, 1500);
        });
