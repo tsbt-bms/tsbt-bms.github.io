@@ -59,7 +59,7 @@ function writeThings (){
         prm.isBal=o.ab.opts.value;
         arg=JSON.stringify(prm);
         connection.write("reset()\n",()=>{
-        connection.write("updatePrmStorage('prm',"+arg+")\n \
+        connection.write("updatePrmStorage('prm',"+prm+")\n \
             local = "+ prm.L +"\n \
             bankName= "+ prm.Bkn + "\n \
             battName ="+ prm.Btn +"\n \
