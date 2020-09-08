@@ -6,10 +6,11 @@
   <link href="TinyDash/tinydash_editor.css" rel="stylesheet"> 
   <script src="TinyDash/tinydash.js"></script>
   <script src="TinyDash/tinydash_editor.js"></script>
-
+  <script src="tsbt.js"></script> 
+ <!-- 
   <script src="uart.js"></script> 
   <script> var TSBT=UART; </script>
-
+ -->
   <script>
     var bank= "TSBT";
     var batt=0;
@@ -47,11 +48,11 @@ var prm={};
 var arg="";
 //TD.startEditor();
 function writeThings (){
-  try{o.log.log("writeThings called");}
-  catch(e){console.log("writeThings called  " + e );}
+  try{o.log.log("salvando ...");}
+  catch(e){console.log("erro ao salvar  " + e );}
   try{
     connection.write("print(JSON.stringify(prm))\n",(r)=>{
-    o.o.log("prepare new values "+r);
+    o.o.log("preparando valores "+r);
     return r;
     });
     prm.L='"'+o.le.innerText+'"';
@@ -71,12 +72,12 @@ function writeThings (){
       Vbalance =" + prm.Vb + "\n \
       Ibalance =" + prm.Ibal + "\n \
       isBalancing =" + prm.isBal +"\n",
-      (rt)=>{o.log.log("updatePrmStorage "+ rt);});  
+      (rt)=>{o.log.log("salvo"+ rt);});  
   } catch (e) {
     try{
       o.log.log(e);
     }catch(e){
-      console.log("connection write "+ e);
+      //console.log("connection write "+ e);
     }
   }
 } 
