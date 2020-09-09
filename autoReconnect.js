@@ -2,7 +2,7 @@ var bluetoothDevice;
 
 function onModal() {
   bluetoothDevice = null;
-  log('Requesting any Bluetooth Device...');
+  o.log.log('Requesting any Bluetooth Device...');
   navigator.bluetooth.requestDevice({
      // filters: [...] <- Prefer filters to save energy & show relevant devices.
      acceptAllDevices: true})
@@ -12,7 +12,7 @@ function onModal() {
     connect();
   })
   .catch(error => {
-    log('Argh! ' + error);
+    o.log.log('Argh! ' + error);
   });
 }
 
@@ -23,7 +23,7 @@ function connect() {
       return bluetoothDevice.gatt.connect();
     },
     function success() {
-      log('> Bluetooth Device connected. Try disconnect it now.');
+      o.log.log('> Bluetooth Device connected. Try disconnect it now.');
     },
     function fail() {
       time('Failed to reconnect.');
@@ -31,7 +31,7 @@ function connect() {
 }
 
 function onDisconnected() {
-  log('> Bluetooth Device disconnected');
+  o.log.log('> Bluetooth Device disconnected');
   connect();
 }
 
@@ -54,5 +54,5 @@ function exponentialBackoff(max, delay, toTry, success, fail) {
 }
 
 function time(text) {
-  log('[' + new Date().toJSON().substr(11, 8) + '] ' + text);
+  o.log.log('[' + new Date().toJSON().substr(11, 8) + '] ' + text);
 }
