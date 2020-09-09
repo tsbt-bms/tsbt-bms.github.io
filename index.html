@@ -124,10 +124,7 @@ function onLine(line) {
        // Wait for it to reset itself
        o.log.log("Aguarde até 10 segundos");
        setTimeout(function() {
-         // Now tell it to write data on the current temperature level to Bluetooth
-         // 10 times a second. Also ensure that when disconnected, tsbt.js
-         // resets so the setInterval doesn't keep draining battery.
-         connection.write("seekPrm\n",  function() { console.log("Lido..."); });
+         connection.write("seekPrm()\n",  function() { console.log("Lido..."); });
          }, 1500);
        });
      });
