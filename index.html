@@ -22,7 +22,7 @@
     function writeThings (){
           try{
                 prm.L='"'+o.le.innerText+'"';
-                prm.Bkn='"'+o.bke.innerText+'"';
+                prm.Bkn=o.bke.opts.value;
                 prm.Btn=o.btn.opts.value;
                 prm.Vb=o.vb.opts.value;
                 prm.Ibal=o.ib.opts.value;
@@ -31,7 +31,7 @@
                     local = "+ prm.L +";\n \
                     bankName= "+ prm.Bkn + ";\n \
                     battName ="+ prm.Btn +";\n \
-                    createTagName() \n \
+                    tagName=createTagName() \n \
                     Vbalance =" + prm.Vb + ";\n \
                     Ibalance =" + prm.Ibal + ";\n \
                     isBalancing =" + prm.isBal +";\n \
@@ -51,8 +51,8 @@
       l:TD.label({x:10,y:10,width:90,height:40,label:"TSBT"}),
       bal:TD.label({x:240,y:10,width:170,height:40,label:"Balanceamento"}),
       le:TD.label({x:110,y:10,width:120,height:40,label:"localidade"}),
-      bk:TD.label({x:10,y:60,width:90,height:40,label:"Banco"}),
-      bke:TD.value({x:110,y:60,width:120,height:40,label:"",value:"1",min:0,step:1,max:10}),
+      bk:TD.label({x:10,y:60,width:90,height:50,label:"Banco"}),
+      bke:TD.value({x:110,y:60,width:120,height:50,label:"",value:"1",min:0,step:1,max:10}),
       bt:TD.label({x:10,y:110,width:90,height:60,label:"Bateria"}),
       //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
       //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
