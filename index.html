@@ -6,12 +6,12 @@
   <link href="TinyDash/tinydash_editor.css" rel="stylesheet"> 
   <script src="TinyDash/tinydash.js"></script>
   <script src="TinyDash/tinydash_editor.js"></script>
-  <script src="tsbt.js"></script>  
+
  <!-- 
+  <script src="tsbt.js"></script>  
+  -->
   <script src="uart.js"></script> 
   <script> var TSBT=UART; </script>
-  -->
-
 
   <script>
     var bank= "0";
@@ -48,18 +48,22 @@
           }
     } 
     var o = {
-      l:TD.label({x:10,y:10,width:90,height:40,label:"TSBT"}),
-      bal:TD.label({x:240,y:10,width:170,height:40,label:"Balanceamento"}),
+      l:TD.label({x:10,y:10,width:90,height:40,label:"TSBT"}),   
       le:TD.label({x:110,y:10,width:120,height:40,label:"localidade"}),
+      bal:TD.label({x:240,y:10,width:170,height:40,label:"Balanceamento"}),
+
       bk:TD.label({x:10,y:60,width:90,height:50,label:"Banco"}),
       bke:TD.value({x:110,y:60,width:120,height:50,label:"",value:"1",min:0,step:1,max:10}),
+      //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
       bt:TD.label({x:10,y:110,width:90,height:60,label:"Bateria"}),
+      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:0,step:1,max:200}),
       //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
       //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
       vb:TD.value({x:240,y:60,width:170,height:60,label:"tensão",value:"3.6",min:3.0,step:0.05,max:3.9}),
       ib:TD.value({x:240,y:110,width:170,height:60,label:"corrente",value:"200",min:50,step:50,max:600}),
-      //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
-      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:0,step:1,max:200}),
+ 
+     
+
       ab:TD.toggle({x:240,y:180,width:170,height:90,label:"Desativar <-----------> Ativar",value:1,name:"toggle"}),
       b:TD.button({x:10,y:180,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{connection.write('LED1.set();LED2.set();setRes();\n',(x)=>{o.log.log('Clique rapidamente "Sair" para destacar')});}catch(e){alert(e);}}}),
       s:TD.button({x:82,y:180,width:65,height:90,label:"-- Salvar",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
@@ -67,6 +71,21 @@
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
       log:TD.log({x:10,y:280,width:400,height:200,label:"Log",text:"conectando"}),
+
+      li:TD.label({x:10,y:490,width:90,height:50,label:"Limites"}),
+      mm:TD.label({x:10,y:540,width:90,height:60,label:"Max / Min"}),
+      tma:TD.value({x:110,y:490,width:120,height:50,label:"temperatura máxima",value:"30",min:30,step:5,max:80}),
+      //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
+ 
+      tmi:TD.value({x:110,y:540,width:120,height:60,label:"temperatura mínima",value:"0",min:-10,step:5,max:10}),
+      //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
+      //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
+      vmax:TD.value({x:240,y:490,width:170,height:60,label:"tensão máxima",value:"3.7",min:3.7,step:0.1,max:4.5}),
+      vmin:TD.value({x:240,y:490,width:170,height:60,label:"tensão mínima",value:"3.0",min:2.5,step:0.1,max:3.8}),
+
+      imax:TD.value({x:10,y:560,width:400,height:60,label:"corrente máxima",value:"200",min:50,step:50,max:600}),
+
+
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar",onchange:connectDevice})
     };
     for (var i in o) document.body.appendChild(o[i]);
