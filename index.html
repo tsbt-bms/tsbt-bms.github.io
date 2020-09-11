@@ -116,9 +116,9 @@ function onLine(line) {
           o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT")
-          o.bt.firstElementChild.innerText="Bateria   "+j.TGn.substr(-5)
-          o.bk.firstElementChild.innerText="Banco   "+j.TGn.substr(0,4)
-
+          o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5)
+          o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4)
+ 
      }
 
    } catch(e) {
