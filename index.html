@@ -37,7 +37,8 @@
                     isBalancing =" + prm.isBal +";\n \
                     restorePrm() ;\n \
                     digitalPulse(LED1,1,500); \n \
-                    digitalPulse(LED2,1,800); \n " ,
+                    digitalPulse(LED2,1,800); \n \
+                    gWs=getWhatToSend(); \n  ",
                     (rt)=>{o.log.log("salvo");});
           } catch (e) {
             try{
