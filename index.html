@@ -76,8 +76,8 @@
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
       log:TD.log({x:10,y:560,width:400,height:200,label:"Log",text:"conectando"}),
 
-      li:TD.label({x:10,y:180,width:90,height:40,label:"Limites"}),
-      do:TD.label({x:10,y:220,width:90,height:40,label:"do"}),
+      li:TD.label({x:10,y:180,width:90,height:20,label:"Limites"}),
+      do:TD.label({x:10,y:210,width:90,height:40,label:"do"}),
       ba:TD.label({x:10,y:250,width:90,height:40,label:"Banco"}),
       spcba:TD.label({x:10,y:290,width:90,height:10,label:""}),
 
@@ -116,17 +116,12 @@ function onLine(line) {
           (j.TGn.substr(-5)!="BT000"?o.ab.setValue(j.isBal):0); //reset prm value if bankNumber is not "BT000"
           (j.TGn.substr(-5)!="BT000"?o.vb.setValue(j.Vb):0);
           (j.TGn.substr(-5)!="BT000"?o.ib.setValue((j.Ibal?j.Ibal:200)):0); 
-          o.bal.setValue(200); // iBalance not implemented yet
+          o.ib.setValue(200); // iBalance not implemented yet
 
           o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
-          try {
-          settimeout(function(){o.le.firstElementChild.innerText=(j.L?j.L:"localidade");},20000);}
-          catch(e){};
-          try {
-          setTimeout(function(){o.le.firstElementChild.innerText=(j.L?j.L:"localidade");},20000);}
-          catch(e){};
+          setTimeout(function(){o.le.firstElementChild.innerText=(j.L?j.L:"localidade");},20000);
           o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
           o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
 
