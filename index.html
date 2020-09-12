@@ -18,15 +18,18 @@
     var batt=1;
     var data = [];
    // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
-
+  
     function writeThings (){
-          try{
+          try{  tagName= if(o.newbank.pressed) {
+                      "tagName=settimeout(function(){createTagName();},20000)"
+                    } else {
+                      "tagName=createTagName()"};
 
                 connection.write("\
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +";\n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +";\n \
-                    tagName=createTagName() ;\n \
+                    "+ tagName + ";\n \
                     Vbalance =" + o.vb.opts.value+ ";\n \
                     Ibalance =" + o.ib.opts.value + ";\n \
                     isBalancing =" + o.ab.pressed +";\n \
@@ -39,7 +42,7 @@
                     digitalPulse(LED1,1,500); \n \
                     digitalPulse(LED2,1,800); \n \
                     gWs=getWhatToSend(); \n  ",
-                    (rt)=>{o.log.log("salvo");});
+                    (rt)=>{o.newBank.setValue(0);o.log.log("salvo");});
           } catch (e) {
             try{
               o.log.log(e);
@@ -116,7 +119,7 @@ function onLine(line) {
           o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
-          setTimeout(function(){o.le.firstElementChild.innerText=(j.L?j.L:"localidade");},20000);
+          settimeout(function(){o.le.firstElementChild.innerText=(j.L?j.L:"localidade");},20000);
           o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
           o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
 
@@ -152,7 +155,7 @@ function onLine(line) {
      connection.write("LED1.set();\n", function() {
        // Wait for it to reset itself
        o.log.log("Aguarde até 10 segundos");
-       setTimeout(function() {
+       settimeout(function() {
          connection.write("seekPrm()\n",  function() { console.log("Lido..."); });
          }, 1500);
        });
