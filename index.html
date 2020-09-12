@@ -76,10 +76,10 @@
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
       log:TD.log({x:10,y:560,width:400,height:200,label:"Log",text:"conectando"}),
 
-      li:TD.label({x:10,y:180,width:90,height:100,label:"Limites"}),
-      do:TD.label({x:10,y:280,width:90,height:40,label:"do"}),
-      ba:TD.label({x:10,y:320,width:90,height:40,label:"Banco"}),
-
+      li:TD.label({x:10,y:180,width:90,height:40,label:"Limites"}),
+      do:TD.label({x:10,y:230,width:90,height:40,label:"do"}),
+      ba:TD.label({x:10,y:270,width:90,height:40,label:"Banco"}),
+      spcba:TD.label({x:10,y:320,width:90,height:40,label:""}),
 
       tma:TD.value({x:110,y:180,width:130,height:50,label:"temperatura máxima",value:"30",min:30,step:5,max:80}),
       //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
@@ -90,6 +90,7 @@
       vmax:TD.value({x:240,y:180,width:170,height:60,label:"tensão máxima das baterias",value:"3.7",min:3.7,step:0.1,max:4.5}),
       vmin:TD.value({x:240,y:230,width:170,height:60,label:"tensão mínima das baterias",value:"3.0",min:2.5,step:0.1,max:3.8}),
       imax:TD.value({x:240,y:300,width:170,height:60,label:"  corrente máxima do banco  ",value:"200",min:50,step:50,max:600}),
+      spcimax:TD.value({x:100,y:300,width:140,height:60,label:"",value:"200",min:50,step:50,max:600}),
       newBank:TD.toggle({x:10,y:470,width:220,height:80,label:"Alterar o nome >>>>>>>>\n do banco ",value:0,name:"newBank",align:"right"}),
       newBankSpace:TD.label({x:240,y:470,width:170,height:80,label:""}),
 
