@@ -68,7 +68,7 @@
  
      
 
-      ab:TD.toggle({x:240,y:370,width:170,height:90,label:"Balancear >>>>>>",value:1,name:"toggle",align:"right"}),
+      ab:TD.toggle({x:240,y:370,width:170,height:90,label:"Balancear >>>>>>",value:1,name:"toggle"}),
       b:TD.button({x:10,y:370,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes();\n',(x)=>{connection.close((x)=>{document.body.appendChild(o.modal);})});}catch(e){alert(e);}}}),
       s:TD.button({x:82,y:370,width:65,height:90,label:"- Salvar -",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
       d:TD.button({x:155,y:370,width:75,height:90,label:"--> Sair -->",value:0,name:"buttonD",onchange:function(e){try{connection.close((x)=>{document.body.appendChild(o.modal);});}catch(e){alert(e);}}}),
@@ -77,7 +77,7 @@
       log:TD.log({x:10,y:560,width:400,height:200,label:"Log",text:"conectando"}),
 
       li:TD.label({x:10,y:180,width:90,height:40,label:"Limites"}),
-      do:TD.label({x:10,y:210,width:90,height:40,label:"do"}),
+      do:TD.label({x:10,y:215,width:90,height:40,label:"do"}),
       ba:TD.label({x:10,y:250,width:90,height:40,label:"Banco"}),
       spcba:TD.label({x:10,y:290,width:90,height:10,label:""}),
 
@@ -91,7 +91,7 @@
       vmin:TD.value({x:240,y:230,width:170,height:60,label:"tensão mínima das baterias",value:"3.0",min:2.5,step:0.1,max:3.8}),
       imax:TD.value({x:240,y:300,width:170,height:60,label:"  corrente máxima do banco  ",value:"200",min:50,step:50,max:600}),
       spcimax:TD.label({x:10,y:300,width:230,height:60,label:""}),
-      newBank:TD.toggle({x:10,y:470,width:220,height:80,label:"Alterar nome >>>>>>>> \n do banco ",value:0,name:"newBank",align:"right"}),
+      newBank:TD.toggle({x:10,y:470,width:220,height:80,label:"Alterar nome >>>>>>>> \n do banco ",value:0,name:"newBank"}),
       newBankSpace:TD.label({x:240,y:470,width:170,height:80,label:""}),
 
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar.",onchange:connectDevice})
@@ -121,8 +121,9 @@ function onLine(line) {
           o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
-          lcld=o.le.firstElementChild.innerText;
-          setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
+          //lcld=o.le.firstElementChild.innerText;
+          //setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
+          o.le.firstElementChild.innerText=j.L;
           o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
           o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
 
