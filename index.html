@@ -77,7 +77,7 @@
       log:TD.log({x:10,y:560,width:400,height:200,label:"Log",text:"conectando"}),
 
       li:TD.label({x:10,y:180,width:90,height:30,label:"Limites"}),
-      do:TD.label({x:10,y:210,width:90,height:40,label:"do"}),
+      do:TD.label({x:10,y:220,width:90,height:30,label:"do"}),
       ba:TD.label({x:10,y:250,width:90,height:40,label:"Banco"}),
       spcba:TD.label({x:10,y:290,width:90,height:10,label:""}),
 
@@ -121,7 +121,8 @@ function onLine(line) {
           o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
-          setTimeout(function(){o.le.firstElementChild.innerText=(j.L?j.L:"localidade");},20000);
+          lcld=o.le.firstElementChild.innerText;
+          setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
           o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
           o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
 
