@@ -89,10 +89,10 @@
       //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
       vmax:TD.value({x:240,y:180,width:170,height:60,label:"tensão máxima das baterias",value:"3.7",min:3.7,step:0.1,max:4.5}),
       vmin:TD.value({x:240,y:230,width:170,height:60,label:"tensão mínima das baterias",value:"3.0",min:2.5,step:0.1,max:3.8}),
-      spc:TD.label({x:10,y:240,width:400,height:60,label:"."}),
+      spc:TD.label({x:10,y:300,width:230,height:60,label:""}),
       imax:TD.value({x:240,y:300,width:170,height:60,label:"- corrente máxima do banco -",value:"200",min:50,step:50,max:600}),
-      newBank:TD.toggle({x:10,y:470,width:230,height:80,label:"Alterar o nome do banco >>>>>>",value:0,name:"newBank",align:"right"}),
-      newBankSpace:TD.label({x:240,y:470,width:160,height:80,label:"."}),
+      newBank:TD.toggle({x:10,y:470,width:230,height:80,label:"Alterar o nome >>>>>>>>\n do banco ",value:0,name:"newBank",align:"right"}),
+      newBankSpace:TD.label({x:240,y:470,width:160,height:80,label:""}),
 
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar.",onchange:connectDevice})
     };
