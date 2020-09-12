@@ -20,10 +20,10 @@
    // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
   
     function writeThings (){
-          try{  tagName= if(o.newbank.pressed) {
-                      "tagName=setTimeout(function(){createTagName();},20000)"
+          try{  if(o.newbank.pressed) {
+                      tagName="tagName=setTimeout(function(){createTagName();},20000)"
                     } else {
-                      "tagName=createTagName()"};
+                      tagName="tagName=createTagName()"};
 
                 connection.write("\
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +";\n \
