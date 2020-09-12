@@ -76,7 +76,7 @@
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
       log:TD.log({x:10,y:560,width:400,height:200,label:"Log",text:"conectando"}),
 
-      li:TD.label({x:10,y:180,width:90,height:30,label:"Limites"}),
+      li:TD.label({x:10,y:180,width:90,height:40,label:"Limites"}),
       do:TD.label({x:10,y:220,width:90,height:30,label:"do"}),
       ba:TD.label({x:10,y:250,width:90,height:40,label:"Banco"}),
       spcba:TD.label({x:10,y:290,width:90,height:10,label:""}),
@@ -91,7 +91,7 @@
       vmin:TD.value({x:240,y:230,width:170,height:60,label:"tensão mínima das baterias",value:"3.0",min:2.5,step:0.1,max:3.8}),
       imax:TD.value({x:240,y:300,width:170,height:60,label:"  corrente máxima do banco  ",value:"200",min:50,step:50,max:600}),
       spcimax:TD.label({x:10,y:300,width:230,height:60,label:""}),
-      newBank:TD.toggle({x:10,y:470,width:220,height:80,label:"Alterar o nome >>>>>>>> \n do banco ",value:0,name:"newBank",align:"right"}),
+      newBank:TD.toggle({x:10,y:470,width:220,height:80,label:"Alterar nome >>>>>>>> \n do banco ",value:0,name:"newBank",align:"right"}),
       newBankSpace:TD.label({x:240,y:470,width:170,height:80,label:""}),
 
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar.",onchange:connectDevice})
