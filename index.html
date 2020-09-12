@@ -116,6 +116,7 @@ function onLine(line) {
           (j.TGn.substr(-5)!="BT000"?o.ab.setValue(j.isBal):0); //reset prm value if bankNumber is not "BT000"
           (j.TGn.substr(-5)!="BT000"?o.vb.setValue(j.Vb):0);
           (j.TGn.substr(-5)!="BT000"?o.ib.setValue((j.Ibal?j.Ibal:200)):0); 
+          o.bal.setValue(200); // iBalance not implemented yet
 
           o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
