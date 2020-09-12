@@ -23,7 +23,7 @@
           try{
 
                 connection.write("\
-                    local = "+ o.le.firstElementChild.innerText.subsstr(0,10) +";\n \
+                    local = "+ o.le.firstElementChild.innerText.substr(0,10) +";\n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +";\n \
                     tagName=createTagName() ;\n \
@@ -116,7 +116,7 @@ function onLine(line) {
           o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
-          o.le.firstElementChild.innerText=(j.L?j.L:"localidade");
+          setTimeout(o.le.firstElementChild.innerText=(j.L?j.L:"localidade",20000));
           o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
           o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
 
