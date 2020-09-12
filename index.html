@@ -65,30 +65,30 @@
  
      
 
-      ab:TD.toggle({x:240,y:180,width:170,height:90,label:"Desativar ---------------- Ativar",value:1,name:"toggle"}),
-      b:TD.button({x:10,y:180,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes();\n',(x)=>{connection.close((x)=>{document.body.appendChild(o.modal);})});}catch(e){alert(e);}}}),
-      s:TD.button({x:82,y:180,width:65,height:90,label:"- Salvar -",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
-      d:TD.button({x:155,y:180,width:75,height:90,label:"--> Sair -->",value:0,name:"buttonD",onchange:function(e){try{connection.close((x)=>{document.body.appendChild(o.modal);});}catch(e){alert(e);}}}),
+      ab:TD.toggle({x:240,y:460,width:170,height:90,label:"Desativar ---------------- Ativar",value:1,name:"toggle"}),
+      b:TD.button({x:10,y:460,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes();\n',(x)=>{connection.close((x)=>{document.body.appendChild(o.modal);})});}catch(e){alert(e);}}}),
+      s:TD.button({x:82,y:460,width:65,height:90,label:"- Salvar -",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
+      d:TD.button({x:155,y:460,width:75,height:90,label:"--> Sair -->",value:0,name:"buttonD",onchange:function(e){try{connection.close((x)=>{document.body.appendChild(o.modal);});}catch(e){alert(e);}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
-      log:TD.log({x:10,y:280,width:400,height:200,label:"Log",text:"conectando"}),
+      log:TD.log({x:10,y:560,width:400,height:200,label:"Log",text:"conectando"}),
 
-      li:TD.label({x:10,y:490,width:90,height:45,label:"Limites"}),
-      do:TD.label({x:10,y:520,width:90,height:40,label:"do"}),
-      ba:TD.label({x:10,y:560,width:90,height:40,label:"Banco"}),
+      li:TD.label({x:10,y:180,width:90,height:45,label:"Limites"}),
+      do:TD.label({x:10,y:210,width:90,height:40,label:"do"}),
+      ba:TD.label({x:10,y:350,width:90,height:40,label:"Banco"}),
 
 
-      tma:TD.value({x:110,y:490,width:130,height:50,label:"temperatura máxima",value:"30",min:30,step:5,max:80}),
+      tma:TD.value({x:110,y:180,width:130,height:50,label:"temperatura máxima",value:"30",min:30,step:5,max:80}),
       //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
  
-      tmi:TD.value({x:110,y:540,width:130,height:60,label:"temperatura mínima",value:"0",min:-20,step:5,max:10}),
+      tmi:TD.value({x:110,y:230,width:130,height:60,label:"temperatura mínima",value:"0",min:-20,step:5,max:10}),
       //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
       //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
-      vmax:TD.value({x:240,y:490,width:170,height:60,label:"tensão máxima das baterias",value:"3.7",min:3.7,step:0.1,max:4.5}),
-      vmin:TD.value({x:240,y:540,width:170,height:60,label:"tensão mínima das baterias",value:"3.0",min:2.5,step:0.1,max:3.8}),
+      vmax:TD.value({x:240,y:180,width:170,height:60,label:"tensão máxima das baterias",value:"3.7",min:3.7,step:0.1,max:4.5}),
+      vmin:TD.value({x:240,y:230,width:170,height:60,label:"tensão mínima das baterias",value:"3.0",min:2.5,step:0.1,max:3.8}),
 
-      imax:TD.value({x:10,y:610,width:400,height:60,label:"corrente máxima",value:"200",min:50,step:50,max:600}),
-      newBank:TD.toggle({x:10,y:680,width:400,height:80,label:"------------------------------------------------- Altera o nome do banco -------------",value:0,name:"newBank"}),
+      imax:TD.value({x:10,y:300,width:400,height:60,label:"corrente máxima",value:"200",min:50,step:50,max:600}),
+      newBank:TD.toggle({x:10,y:370,width:400,height:80,label:"-------------------------------------------------------------- Altera o nome do banco ",value:0,name:"newBank"}),
 
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar.",onchange:connectDevice})
     };
