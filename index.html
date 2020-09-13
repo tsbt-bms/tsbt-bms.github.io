@@ -69,7 +69,7 @@
      
 
       ab:TD.toggle({x:240,y:370,width:170,height:90,label:"Balancear >>>>>>",value:1,name:"toggle"}),
-      b:TD.button({x:10,y:370,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes();\n',(x)=>{connection.close((x)=>{document.body.appendChild(o.modal);})});}catch(e){alert(e);}}}),
+      b:TD.button({x:10,y:370,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes();\n');connection.close().then((x)=>{document.body.appendChild(o.modal);},alert("Erro ao fechar conexão "+ x));}catch(e){alert("Erro ao sair "+  e);}}}),
       s:TD.button({x:82,y:370,width:65,height:90,label:"- Salvar -",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
       d:TD.button({x:155,y:370,width:75,height:90,label:"--> Sair -->",value:0,name:"buttonD",onchange:function(e){try{connection.close((x)=>{document.body.appendChild(o.modal);});}catch(e){alert(e);}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
