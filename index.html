@@ -26,8 +26,7 @@
                     } else {
                       tagNameScript="tagName=createTagName(); \n restorePrm() ;\n }"
                     }
-                connection.write("  \
-                    local = "+o.le.innerText.substr(0,10)+" ; \n \
+                connection.write("local = "+o.le.innerText.substr(0,10)+" ; \n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +"; \n \
                     Vbalance =" + o.vb.opts.value+ ";\n \
