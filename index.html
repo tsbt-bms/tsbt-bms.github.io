@@ -22,7 +22,7 @@
    //" + tagNameScript +"; \
     function writeThings (){
           try{  if(o.newBank.pressed) {
-                      tagNameScript="setTimeOut(()=>{tagName=createTagName(); \n restorePrm() ; \n},20000)"
+                      tagNameScript="setTimeOut(()=>{tagName=createTagName(); restorePrm() ; },20000) \n"
                     } else {
                       tagNameScript="tagName=createTagName(); \n restorePrm() ;\n }"
                     }
