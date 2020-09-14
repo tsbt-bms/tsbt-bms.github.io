@@ -30,7 +30,7 @@
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +"; \n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +"; \n \
-                    createTagName(); \n \
+                    "+tagNameScript+" \
                     Vbalance =" + o.vb.opts.value+ ";\n \
                     Ibalance =" + o.ib.opts.value + ";\n \
                     isBalancing =" + o.ab.pressed +";\n \
