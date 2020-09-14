@@ -22,9 +22,9 @@
    //" + tagNameScript +"; \
     function writeThings (){
           try{  if(o.newBank.pressed) {
-                      tagNameScript="setTimeout(function(){bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() \n;},20000)"
+                      tagNameScript="createTagName(); \n restorePrm() ; \n},20000)"
                     } else {
-                      tagNameScript="bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() ;\n }"
+                      tagNameScript="createTagName(); \n restorePrm() ;\n }"
                     }
                 connection.write("\
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +"; \n \
@@ -41,9 +41,8 @@
                     Ibank_max= "+  o.imax.opts.value+";\n \
                     digitalPulse(LED1,1,500); \n \
                     digitalPulse(LED2,1,800); \n \
-                    restorePrm() \n \
                     gWs=getWhatToSend(); \n  ",
-                    (rt)=>{o.log.log("salvo");});
+                    (rt)=>{o.log.log("salvo");o.log.log(tagNameScript)});
           } catch (e) {
             try{
               o.log.log(e);
@@ -124,9 +123,9 @@ function onLine(line) {
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
           //lcld=o.le.firstElementChild.innerText;
           //setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
-          o.le.firstElementChild.innerText=j.L;
-          o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
-          o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
+          //o.le.firstElementChild.innerText=j.L;
+          //o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
+          //o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
 
      }
 
