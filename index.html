@@ -43,7 +43,7 @@
                     digitalPulse(LED1,1,500); \n \
                     digitalPulse(LED2,1,800); \n \
                     gWs=getWhatToSend(); \n  ",
-                    (rt)=>{o.newBank.setValue(0);o.log.log("salvo");});
+                    (rt)=>{o.log.log("salvo");});
           } catch (e) {
             try{
               o.log.log(e);
@@ -119,7 +119,7 @@ function onLine(line) {
           (j.TGn.substr(-5)!="BT000"?o.ib.setValue((j.Ibal?j.Ibal:200)):0); 
           o.ib.setValue(200); // iBalance not implemented yet
 
-          o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
+          //o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
           o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
           //lcld=o.le.firstElementChild.innerText;
@@ -157,7 +157,7 @@ function onLine(line) {
        }
      });
 
-     connection.on("close",(x)=>{document.body.appendChild(o.modal);});
+     connection.on("close",(x)=>{o.newBank.setValue(0);document.body.appendChild(o.modal);});
      // First, reset tsbt.js
      connection.write("LED1.set();\n", function() {
        // Wait for it to reset itself
