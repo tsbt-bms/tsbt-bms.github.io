@@ -22,7 +22,7 @@
   
     function writeThings (){
           try{  if(o.newBank.pressed) {
-                      tagName="tagName=setTimeout(function(){bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() \n;},20000)"
+                      tagName="setTimeout(function(){bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() \n;},20000)"
                     } else {
                       tagName="bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() ;\n "};
 
