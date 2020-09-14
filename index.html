@@ -22,9 +22,9 @@
    //" + tagNameScript +"; \
     function writeThings (){
           try{  if(o.newBank.pressed) {
-                      tagNameScript="createTagName(); \n restorePrm() ; \n},20000)"
+                      tagNameScript="setTimeOut(()=>{tagName=createTagName(); \n restorePrm() ; \n},20000)"
                     } else {
-                      tagNameScript="createTagName(); \n restorePrm() ;\n }"
+                      tagNameScript="tagName=createTagName(); \n restorePrm() ;\n }"
                     }
                 connection.write("\
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +"; \n \
@@ -124,8 +124,8 @@ function onLine(line) {
           //lcld=o.le.firstElementChild.innerText;
           //setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
           //o.le.firstElementChild.innerText=j.L;
-          //o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
-          //o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
+          o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
+          o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
 
      }
 
