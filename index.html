@@ -27,7 +27,7 @@
                       tagNameScript="tagName=createTagName(); \n restorePrm() ;\n }"
                     }
                 connection.write("\
-                    local = "+ o.le.firstElementChild.innerText.substr(0,10) +"; \n \
+                    local = "+ o.le.innerText.substr(0,10) +"; \n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +"; \n \
                     Vbalance =" + o.vb.opts.value+ ";\n \
@@ -43,7 +43,7 @@
                     gWs=getWhatToSend(); \n  "
                     +tagNameScript,
 
-                    (rt)=>{o.log.log("salvo");o.log.log("o.le.firstElementChild.innerText.substr(0,10)" );});
+                    (rt)=>{o.log.log("salvo");o.log.log(o.le.innerText.substr(0,10) );});
           } catch (e) {
             try{
               o.log.log(e);
