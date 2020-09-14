@@ -30,7 +30,6 @@
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +"; \n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +"; \n \
-                    "+tagNameScript+" \
                     Vbalance =" + o.vb.opts.value+ ";\n \
                     Ibalance =" + o.ib.opts.value + ";\n \
                     isBalancing =" + o.ab.pressed +";\n \
@@ -41,7 +40,9 @@
                     Ibank_max= "+  o.imax.opts.value+";\n \
                     digitalPulse(LED1,1,500); \n \
                     digitalPulse(LED2,1,800); \n \
-                    gWs=getWhatToSend(); \n  ",
+                    gWs=getWhatToSend(); \n  "
+                    +tagNameScript,
+
                     (rt)=>{o.log.log("salvo");o.log.log(tagNameScript)});
           } catch (e) {
             try{
