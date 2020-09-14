@@ -25,7 +25,7 @@
                       tagNameScript="setTimeout(function(){bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() \n;},20000)"
                     } else {
                       tagNameScript="bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() ;\n }"
-
+                    }
                 connection.write("\
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +"; \n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
