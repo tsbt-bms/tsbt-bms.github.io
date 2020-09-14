@@ -157,7 +157,7 @@ function onLine(line) {
        }
      });
 
-     connection.on("close",(x)=>{o.newBank.setValue(0);document.body.appendChild(o.modal);});
+     connection.on("close",(x)=>{o.newBank.setValue(0);o.log.clear();document.body.appendChild(o.modal);});
      // First, reset tsbt.js
      connection.write("LED1.set();\n", function() {
        // Wait for it to reset itself
