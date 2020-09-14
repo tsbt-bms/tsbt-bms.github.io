@@ -19,7 +19,7 @@
     var batt=1;
     var data = [];
    // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
-  
+   //" + tagNameScript +"; \
     function writeThings (){
           try{  if(o.newBank.pressed) {
                       tagNameScript="setTimeout(function(){bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() \n;},20000)"
@@ -30,7 +30,7 @@
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +"; \n \
                     bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +"; \n \
-                    "+/* tagNameScript*/ + "; \
+                    createTagName(); \n \
                     Vbalance =" + o.vb.opts.value+ ";\n \
                     Ibalance =" + o.ib.opts.value + ";\n \
                     isBalancing =" + o.ab.pressed +";\n \
@@ -41,6 +41,7 @@
                     Ibank_max= "+  o.imax.opts.value+";\n \
                     digitalPulse(LED1,1,500); \n \
                     digitalPulse(LED2,1,800); \n \
+                    restorePrm() \n \
                     gWs=getWhatToSend(); \n  ",
                     (rt)=>{o.log.log("salvo");o.log.log(tagNamescript);});
           } catch (e) {
