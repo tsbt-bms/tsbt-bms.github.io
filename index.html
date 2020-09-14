@@ -22,13 +22,12 @@
   
     function writeThings (){
           try{  if(o.newBank.pressed) {
-                      tagName="tagName=setTimeout(function(){createTagName();},20000)"
+                      tagName="tagName=setTimeout(function(){bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() ;\n },20000)"
                     } else {
-                      tagName="tagName=createTagName()"};
+                      tagName="bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n createTagName(); \n restorePrm() ;\n "};
 
                 connection.write("\
                     local = "+ o.le.firstElementChild.innerText.substr(0,10) +";\n \
-                    bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ ";\n \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +";\n \
                     "+ tagName + ";\n \
                     Vbalance =" + o.vb.opts.value+ ";\n \
@@ -39,7 +38,6 @@
                     Tmax= "+  o.tma.opts.value+";\n \
                     Tmin= "+  o.tmi.opts.value+";\n \
                     Ibank_max= "+  o.imax.opts.value+";\n \
-                    restorePrm() ;\n \
                     digitalPulse(LED1,1,500); \n \
                     digitalPulse(LED2,1,800); \n \
                     gWs=getWhatToSend(); \n  ",
