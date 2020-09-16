@@ -23,16 +23,15 @@
    // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
    //" + tagNameScript +"; \
     function writeThings (){
-          try{  if(o.newBank.pressed) {
+          try{  if((o.newBank.pressed!=undefined?o.newBank.pressed:o.newBank.opts.value)) {
                       tagNameScript="setTimeout(()=>{tagName=createTagName(); restorePrm() ; },20000) \n"
                     } else {
                       tagNameScript="tagName=createTagName(); \n restorePrm() ;\n }"
                     }
-                connection.write("local = "+o.le.innerText.substr(0,10)+" ; \n \
-                    bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
+                connection.write("bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
                     battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +"; \n \
                     Vbalance =" + o.vb.opts.value+ ";\n \
-                    Ibalance =" + o.ib.opts.value + ";\n \
+                    Ibalance =" + (o.ab.pressed!=undefined?o.ab.pressed:o.ab.opts.value) + ";\n \
                     isBalancing =" + o.ab.opts.value +";\n \
                     Vmax= "+ o.vmax.opts.value+";\n \
                     Vmin= "+  o.vmin.opts.value+";\n \
