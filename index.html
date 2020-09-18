@@ -33,11 +33,13 @@
                     Vbalance =" +o.vb.opts.value + ";\n \
                     Ibalance =" + o.ib.opts.value + ";\n \
                     isBalancing =" + (o.ab.pressed!=undefined?o.ab.pressed:o.ab.opts.value) +";\n \
+                   "+
                    // Vmax= "+ o.vmax.opts.value+";\n \
                    // Vmin= "+  o.vmin.opts.value+";\n \
                    // Tmax= "+  o.tma.opts.value+";\n \
-                   // Tmin= "+  o.tmi.opts.value+";\n \
-                    Ibank_max= "+  o.imax.opts.value+";\n \
+                   // Tmin= "+  o.tmi.opts.value+";\n \"
+                   + " \s
+                    Ibank_max= "+  o.imax.opts.value+";\n \s
                     digitalPulse(LED1,1,500); \n \
                     digitalPulse(LED2,1,800); \n \
                     gWs=getWhatToSend(); \n  "
