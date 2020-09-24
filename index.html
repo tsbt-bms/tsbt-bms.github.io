@@ -18,7 +18,7 @@
   <script>
     
     var bank;
-    var type;
+    var batt;
     var data = [];
    // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
    //" + tagNameScript +"; \
@@ -29,7 +29,7 @@
                       tagNameScript="tagName=createTagName(); \n restorePrm() ;\n }"
                     }
                 connection.write("bankNumber= "+ (o.bke.opts.value>=0?o.bke.opts.value:0)+ "; \n  \
-                    battNumber ="+ (o.btn.opts.value>0 && type != 'TSGW'?o.btn.opts.value:0) +"; \n \
+                    battNumber ="+ (o.btn.opts.value>=0?o.btn.opts.value:0) +"; \n \
                     Vbalance =" +o.vb.opts.value + ";\n \
                     Ibalance =" + o.ib.opts.value + ";\n \
                     isBalancing =" + (o.ab.pressed!=undefined?o.ab.pressed:o.ab.opts.value) +";\n \
@@ -40,8 +40,8 @@
                    // Tmin= "+  o.tmi.opts.value+";\n \"
                    + " \
                     Ibank_max= "+  o.imax.opts.value+";\n \
-                     LED1.reset(); \n \
-                     LED2.reset(); \n \
+                    digitalPulse(LED1,1,500); \n \
+                    digitalPulse(LED2,1,800); \n \
                     gWs=getWhatToSend(); \n  "
                     +tagNameScript,
 
@@ -72,9 +72,9 @@
      
 
       ab:TD.toggle({x:240,y:250,width:170,height:90,label:"Balancear >>>>>>",value:1,name:"balance"}),
-      b:TD.button({x:10,y:250,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write(' LED1.reset(); LED2.reset();setRes(1);\n');}catch(e){alert("Erro ao localizar "+  e);}}}),
-      s:TD.button({x:82,y:250,width:65,height:90,label:"- Salvar -",value:0,name:"buttonSr",onchange:function(e){try{connection.write(' LED1.reset(); LED2.reset();\n');writeThings();}catch(e){alert(e);}}}),
-      d:TD.button({x:155,y:250,width:75,height:90,label:"--> Sair -->",value:0,name:"buttonD",onchange:function(e){try{connection.write(' LED1.reset(); LED2.reset();changeFreqSensor();NRF.disconnect()\n')} catch(e){alert("Erro ao pressionar o botão Sair "+e)}}}),
+      b:TD.button({x:10,y:250,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes('+batt+');\n');}catch(e){alert("Erro ao localizar "+  e);}}}),
+      s:TD.button({x:82,y:250,width:65,height:90,label:"- Salvar -",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
+      d:TD.button({x:155,y:250,width:75,height:90,label:"--> Sair -->",value:0,name:"buttonD",onchange:function(e){try{connection.write('LED1.set();LED2.set();changeFreqSensor();NRF.disconnect()\n')} catch(e){alert("Erro ao pressionar o botão Sair "+e)}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
       //gr:TD.graph({x:220,y:220,width:400,height:170,label:"Evolução",data:data}),
       log:TD.log({x:10,y:440,width:400,height:200,label:"Log",text:"conectando"}),
@@ -119,8 +119,8 @@ function onLine(line) {
           (j.TGn.substr(-5)!="BT000"?o.ab.setValue(j.isBal):0); //reset prm value if battNumber is not "BT000"
           (j.TGn.substr(-5)!="BT000"?o.vb.setValue(j.Vb):0);
           (j.TGn.substr(-5)!="BT000"?o.ib.setValue((j.Ibal?j.Ibal:200)):0); 
-          type = j.TStype;
-//          (j.TGn.substr(-5)=="BT000"?o.btn.setValue(0):0);      //refrain changing battnumber when it is a gateway
+          batt = j.TGn.substr(-5);
+//          (j.TGn.substr(-5)="BT000"?o.btn.setValue(0):0);      //refrain changing battnumber when it is a gateway
 //          o.ib.setValue(j.Ibal); // iBalance not implemented yet
 
           //o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
