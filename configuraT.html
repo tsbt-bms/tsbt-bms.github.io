@@ -70,7 +70,7 @@
      
 
       ab:TD.toggle({x:240,y:370,width:170,height:90,label:"Balancear >>>>>>",value:1,name:"balance"}),
-      b:TD.button({x:10,y:370,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes(1);\n');}catch(e){alert("Erro ao localizar "+  e);}}}),
+      b:TD.button({x:10,y:370,width:65,height:90,label:"Localizar",value:0,name:"buttonL",onchange:function(e){try{o.log.log('Clique "Sair" imediatamente para destacar');connection.write('LED1.set();LED2.set();setRes('+o.newBankSpace.opts.value+');\n');}catch(e){alert("Erro ao localizar "+  e);}}}),
       s:TD.button({x:82,y:370,width:65,height:90,label:"- Salvar -",value:0,name:"buttonSr",onchange:function(e){try{connection.write('digitalPulse(LED1,1,500);LED2.set();\n');writeThings();}catch(e){alert(e);}}}),
       d:TD.button({x:155,y:370,width:75,height:90,label:"--> Sair -->",value:0,name:"buttonD",onchange:function(e){try{connection.write('LED1.set();LED2.set();changeFreqSensor();NRF.disconnect()\n')} catch(e){alert("Erro ao pressionar o botão Sair "+e)}}}),
       //t:TD.gauge({x:430,y:10,width:200,height:210,label:"Temperatura 0 a 50 ºC",value:25,min:0,max:50,name:"gaugeT"}),
@@ -93,7 +93,7 @@
       imax:TD.value({x:240,y:300,width:170,height:60,label:"  corrente máxima do banco  ",value:"200",min:50,step:50,max:600}),
       spcimax:TD.label({x:10,y:300,width:230,height:60,label:""}),
       newBank:TD.toggle({x:10,y:470,width:220,height:80,label:"Alterar nome >>>>>>>> \n do banco ",value:0,name:"newBank"}),
-      newBankSpace:TD.label({x:240,y:470,width:170,height:80,label:""}),
+      newBankSpace:TD.toggle({x:240,y:470,width:170,height:80,label:"programa",value:"0",min:0,step:1,max:4}),
 
       modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar.",onchange:connectDevice})
     };
