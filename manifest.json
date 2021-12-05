@@ -2,7 +2,7 @@
     "dir": "ltr",
     "lang": "pt",
     "name": "TSBT topsensor battery management system",
-    "scope": "/",
+    "scope": "/CONFIGURA",
     "display": "standalone",
     "start_url": "configuraT.html",
     "short_name": "TSBT",
