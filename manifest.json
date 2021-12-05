@@ -1,0 +1,44 @@
+{
+    "dir": "ltr",
+    "lang": "pt",
+    "name": "TSBT topsensor battery management system",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "configuraT.html",
+    "short_name": "TSBT",
+    "theme_color": "#5b7ad0",
+    "description": "TSBT module configurator",
+    "orientation": "Portrait",
+    "background_color": "#5b7ad0",
+    "related_applications": "",
+    "prefer_related_applications": false,
+    "categories": [
+        "utilities"
+    ],
+    "icons": [
+        {
+            "src": "icons/android/android-launchericon-144-144.png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "icons/android/android-launchericon-192-192.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "icons/android/android-launchericon-48-48.png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "icons/android/android-launchericon-512-512.png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "icons/android/android-launchericon-72-72.png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "icons/android/android-launchericon-96-96.png",
+            "sizes": "96x96"
+        }
+    ]
+}
