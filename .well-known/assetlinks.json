@@ -1,6 +1,9 @@
-[{
-        "relation": ["delegate_permission/common.handle_all_urls"],
-        "target" : { "namespace": "android_app", "package_name": "io.github.tsbt_bms.twa",
-                     "sha256_cert_fingerprints": ["96:69:99:9C:DB:21:14:12:A5:AB:13:BB:0A:45:8C:22:46:4D:D1:88:0E:1C:00:9D:AC:66:F5:9E:01:9C:F7:CD"] }
-      }
-]
+{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.tsbt_bms.twa",
+        "sha256_cert_fingerprints":
+          ["8F:86:AE:33:37:14:01:D6:DE:46:85:40:37:60:AF:44:09:99:24:E2:B9:B7:A0:2F:CA:5B:50:49:D9:98:A9:AF"]
+       }
+    }
