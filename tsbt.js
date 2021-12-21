@@ -53,7 +53,9 @@ Or more advanced usage with control of the connection
         // Browser globals (root is window)
         root.TSBT = factory();
     }
-}(typeof self !== 'undefined' ? self : this, function () {
+}
+
+(typeof self !== 'undefined' ? self : this, function () {
 
   if (typeof navigator == "undefined") return;
 
@@ -85,10 +87,7 @@ Or more advanced usage with control of the connection
     return false;
   }
 
-  var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
-  var NORDIC_TX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
-  var NORDIC_RX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
-  var CHUNKSIZE = 16;
+
 
   function log(level, s) {
     if (tsbt.log) tsbt.log(level, s);
@@ -115,6 +114,7 @@ Or more advanced usage with control of the connection
     else if (q.type=="write") tsbt.write(q.data, q.callback, q.callbackNewline);
     else log(1,"Unknown queue item "+JSON.stringify(q));
   }
+
 
   function connect(callback) {
     if (!checkIfSupported()) return;
@@ -398,6 +398,8 @@ Or more advanced usage with control of the connection
       cmd += 'if (E.setTimeZone) E.setTimeZone('+d.getTimezoneOffset()/-60+');\n';
       write(cmd, cb);
     },
+
+ 
     /// Did `write` and `eval` manage to create a connection?
     isConnected : function() {
       return connection!==undefined;

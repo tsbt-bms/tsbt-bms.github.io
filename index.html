@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html><head>
   <meta name="viewport" content="width=640, initial-scale=1">
   <script type="module">
     import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
     const el = document.createElement('pwa-update');
     document.body.appendChild(el);
- </script>
+ </script> 
 </head>
 <body>
   <link rel="manifest" href="/manifest.json">
@@ -67,7 +68,7 @@
       bke:TD.value({x:110,y:60,width:120,height:50,label:"",value:"1",min:0,step:1,max:10}),
       //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
       bt:TD.label({x:10,y:110,width:90,height:60,label:"Bateria"}),
-      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:0,step:1,max:200}),
+      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:0,step:1,max:336}),
       //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
       //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
       vb:TD.value({x:240,y:60,width:170,height:60,label:"tensão",value:"3.25",min:3.2,step:0.05,max:4.5}),
@@ -94,14 +95,15 @@
       tmi:TD.value({x:110,y:230,width:130,height:60,label:"temperatura mínima",value:"0",min:-20,step:5,max:10}),
       //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
       //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),
-      vmax:TD.value({x:240,y:180,width:170,height:60,label:"tensão máxima das baterias",value:"4.0",min:3.7,step:0.1,max:4.5}),
+      vmax:TD.value({x:240,y:180,width:170,height:60,label:"tensão máxima das baterias",value:"3.7",min:3.7,step:0.1,max:4.5}),
       vmin:TD.value({x:240,y:230,width:170,height:60,label:"tensão mínima das baterias",value:"2.5",min:2.5,step:0.1,max:3.8}),
       imax:TD.value({x:240,y:300,width:170,height:60,label:"  corrente máxima do banco  ",value:"200",min:50,step:50,max:600}),
       spcimax:TD.label({x:10,y:300,width:230,height:60,label:""}),
       newBank:TD.toggle({x:10,y:470,width:220,height:80,label:"Alterar nome >>>>>>>> \n do banco ",value:0,name:"newBank"}),
       newBankSpace:TD.value({x:240,y:470,width:170,height:80,label:"programa",value:"1",min:0,step:1,max:4}),
 
-      modal:TD.modal({x:10,y:10,width:400,height:480,label:"Clique para conectar.",onchange:connectDevice})
+      modal:TD.modal({x:10,y:10,width:400,height:430,label:"Clique para conectar.",onchange:connectDevice}),
+      modalDevices:TD.modal({x:10,y:440,width:400,height:100,label:"scan.",onchange:readAdv})
     };
     for (var i in o) document.body.appendChild(o[i]);
 
@@ -110,7 +112,95 @@
 var prm={};
 var arg="";
 //TD.startEditor();
- 
+
+var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+var NORDIC_TX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+var NORDIC_RX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+var CHUNKSIZE = 16;
+/* Utils */
+
+const logDataView = (labelOfDataSource, key, valueDataView) => {
+  const hexString = [...new Uint8Array(valueDataView.buffer)].map(b => {
+    return b.toString(16).padStart(2, '0');
+  }).join(' ');
+  const textDecoder = new TextDecoder('ascii');
+  const asciiString = textDecoder.decode(valueDataView.buffer);
+  o.log.log(
+    //`${labelOfDataSource} Data: ` + 
+  key +
+      '\n    (Hex) ' + hexString +
+      '\n    (ASCII) ' + asciiString);
+}; 
+function readAdv(){
+    if (!checkIfSupported()) return;
+    navigator.bluetooth.requestDevice({
+      filters:[
+        { namePrefix: 'TS00' },
+        { namePrefix: 'TS01' },
+        { namePrefix: 'TS02' },
+        { namePrefix: 'TS03' },
+        { namePrefix: 'TS04' },
+        { namePrefix: 'TS05' },
+        { namePrefix: 'TS06' },
+        { namePrefix: 'TS07' },
+        { namePrefix: 'TS08' },
+        { namePrefix: 'TS09' },
+ //       { services: [ NORDIC_SERVICE ] }
+      ]
+ //     , optionalServices: [ NORDIC_SERVICE ]
+    })
+    .then(function(device) {
+    //log(1, 'Device Name:       ' + device.name);
+    //log(1, 'Device ID:         ' + device.id);
+    // Was deprecated: Should use getPrimaryServices for this in future
+    //log('BT>  Device UUIDs:      ' + device.uuids.join('\n' + ' '.repeat(21)));
+    device.addEventListener("advertisementreceived", (event) => {
+      o.log.log(event.device.name);
+      //o.log.log("  RSSI: " + event.rssi);
+      //o.log.log("  TX Power: " + event.txPower);
+      event.manufacturerData.forEach((valueDataView, key) => {
+        console.log(key);
+        logDataView('Manufacturer', key, valueDataView);
+      });
+
+      event.serviceData.forEach((valueDataView, key) => {
+        o.log.log(`Service (${key}) data: ${valueDataView.getUint8()}`);
+      });
+    });
+    device.watchAdvertisements().catch((error) => {
+      o.log.log("Error:" + error);
+    });
+  })
+
+  .catch((error) => {
+    console.log("Error" + error);
+  });
+}
+
+function checkIfSupported() {
+    // Hack for windows
+    if (navigator.platform.indexOf("Win")>=0 &&
+        (navigator.userAgent.indexOf("Chrome/54")>=0 ||
+         navigator.userAgent.indexOf("Chrome/55")>=0 ||
+         navigator.userAgent.indexOf("Chrome/56")>=0)
+        ) {
+      console.warn("Chrome <56 no Windows não oferece suporte adequado para web bluetooth");
+      if (confirm("Web Bluetooth no Windows não está disponível.\nClique Ok para outras opções"))
+        window.location = "tsbt.js+Quick+Start";
+      return false;
+    }
+    if (navigator.bluetooth) return true;
+    console.warn("Sem Web Bluetooth nessa platforma");
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (iOS) {
+      if (confirm("Para usar o web bluetooth no iOS instale o WebBLE App.\n Clique Ok para ir ao App Store e baixá-lo."))
+        window.location = "https://itunes.apple.com/us/app/webble/id1193531073";
+    } else {
+      if (confirm("Esse browser não suporta Web Bluetooth.\nClique OK para instruções e habilitá-lo."))
+        window.location = "tsbt.js+Quick+Start";
+    }
+    return false;
+  }
     
 function onLine(line) {
    //o.log.log(line);
@@ -127,12 +217,14 @@ function onLine(line) {
 
           //o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
           //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
-          o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
+          o.l.firstElementChild.innerText=(j.TSt?j.TSt:"TSBT");
           //lcld=o.le.firstElementChild.innerText;
           //setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
           o.le.firstElementChild.innerText= j.Vrs;
           o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
           o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
+          o.bke.setValue(parseInt(j.TGn.substr(2,3)));
+          o.btn.setValue(parseInt(j.TGn.substr(-3)));
 
      }
 
