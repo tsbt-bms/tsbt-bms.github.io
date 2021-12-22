@@ -133,6 +133,8 @@ function onLine(line) {
           o.le.firstElementChild.innerText= j.Vrs;
           o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
           o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
+          o.bke.setValue(parseInt(j.TGn.substr(2,3)));
+          o.btn.setValue(parseInt(j.TGn.substr(-3)));
 
      }
 
