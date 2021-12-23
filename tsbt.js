@@ -116,8 +116,15 @@ Or more advanced usage with control of the connection
     else log(1,"Unknown queue item "+JSON.stringify(q));
   }
 
-  function connect(callback) {
+  var defaultFilters = {
+    filters:[
+      { namePrefix: 'TS' },
+      { services: [ NORDIC_SERVICE ] }
+    ], optionalServices: [ NORDIC_SERVICE ]};
+
+  function connect(callback,filters = defaultFilters) {
     if (!checkIfSupported()) return;
+
 
     var connection = {
       on : function(evt,cb) { this["on"+evt]=cb; },
@@ -192,11 +199,7 @@ Or more advanced usage with control of the connection
       }
     };
 
-    navigator.bluetooth.requestDevice({
-        filters:[
-          { namePrefix: 'TS' },
-          { services: [ NORDIC_SERVICE ] }
-        ], optionalServices: [ NORDIC_SERVICE ]}).then(function(device) {
+    navigator.bluetooth.requestDevice(filters).then(function(device) {
       log(1, 'Device Name:       ' + device.name);
       log(1, 'Device ID:         ' + device.id);
       // Was deprecated: Should use getPrimaryServices for this in future
@@ -418,7 +421,7 @@ Or more advanced usage with control of the connection
     modal : function(callback) {
       var e = document.createElement('div');
       e.style = 'position:absolute;top:0px;left:0px;right:0px;bottom:0px;opacity:0.5;z-index:100;background:black;';
-      e.innerHTML = '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family: Sans-Serif;font-size:400%;color:white;">Click to Continue...</div>';
+      e.innerHTML = '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family: Sans-Serif;font-size:400%;color:white;">Clique para continuar...</div>';
       e.onclick = function(evt) {
         callback();
         evt.preventDefault();

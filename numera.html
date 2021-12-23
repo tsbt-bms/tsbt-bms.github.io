@@ -1,0 +1,136 @@
+<html><head>
+  <meta name="viewport" content="width=640, initial-scale=1">
+  <script type="module">
+    import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+    const el = document.createElement('pwa-update');
+    document.body.appendChild(el);
+ </script>
+</head>
+<body>
+  <link rel="manifest" href="/manifest.json">
+  <link href="TinyDash/tinydash.css" rel="stylesheet">
+  <link href="TinyDash/tinydash_editor.css" rel="stylesheet"> 
+  <script src="TinyDash/tinydash.js"></script>
+  <script src="TinyDash/tinydash_editor.js"></script>
+
+ 
+     <script src="tsbt.js"></script>  
+
+
+ <!--
+  <script src="uart.js"></script> 
+  <script> var TSBT=UART; </script>
+       -->
+  <script>
+    
+    var bank= "0";
+    var batt=1;
+    var data = [];
+   // for (var i=0;i<100;i++) data.push(Math.cos(i/10));
+   //" + tagNameScript +"; \
+  
+
+    
+    var o = {
+      l:TD.label({x:10,y:10,width:90,height:40,label:"TSBT"}),   
+      le:TD.label({x:110,y:10,width:120,height:40,label:""}),
+      bal:TD.label({x:240,y:10,width:170,height:40,label:""}),
+
+      bk:TD.label({x:10,y:60,width:90,height:50,label:"Banco"}),
+      bke:TD.value({x:110,y:60,width:120,height:50,label:"",value:"1",min:0,step:1,max:10}),
+      //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
+      bt:TD.label({x:10,y:110,width:90,height:60,label:"Bateria"}),
+      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:0,step:1,max:399}),
+      //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
+      //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),     
+      modal1:TD.modal({x:240,y:85,width:170,height:45,label:"parear",onchange:connectDevice}),
+      modal2:TD.modal({x:240,y:85,width:170,height:40,label:"sair",onchange:
+      function(e){try{connection.write('LED1.set();LED2.set();changeFreqSensor();NRF.disconnect()\n')} catch(e){alert("Erro ao pressionar o botão Sair ")}}
+    
+    })
+      
+    };
+    for (var i in o) document.body.appendChild(o[i]);
+    o.modal2.remove();
+
+    //o.le.contentEditable = "true";
+    //o.bke.contentEditable = "true";
+var prm={};
+var arg="";
+//TD.startEditor();
+ 
+    
+function onLine(line) {
+   //console.log(line);
+   try {
+    var patt = new RegExp("{.*}");
+     var j = JSON.parse(patt.exec(line));
+     if (Object.keys(j).length > 1){
+
+          prm=j;
+
+          batt = j.TGn.substr(-5);
+
+          //o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
+          //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
+          o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
+          //lcld=o.le.firstElementChild.innerText;
+          //setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
+          o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
+          o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
+          o.bke.setValue(parseInt(j.TGn.substr(2,3)));
+          o.btn.setValue(parseInt(j.TGn.substr(-3)));
+
+     }
+
+   } catch(e) {
+    // o.log.log(e);
+   }
+ }
+ var filters = {
+      filters:[
+        { namePrefix: 'TS03 BT399' },
+        { namePrefix: 'TS03 BT000' },
+        { services: [ NORDIC_SERVICE ] }
+      ], optionalServices: [ NORDIC_SERVICE ]};
+ var connection;
+ function connectDevice() {
+   TSBT.connect(function(c) {
+     if (!c) {
+       alert("Desconectado!");
+       return;
+     }
+     connection = c;
+     // remove modal window
+        o.modal1.remove();
+        document.body.appendChild(o.modal2);
+     // Handle the data we get back, and call 'onLine'
+     // whenever we get a line
+     var buf = "";
+     connection.on("close",(x)=>{document.body.appendChild(o.modal1);o.modal2.remove();});
+     connection.on("data", function(d) {
+       buf += d;
+       var i = buf.indexOf("\n");
+       while (i>=0) {
+        console.log(buf.substr(0,i));
+         onLine(buf.substr(0,i));
+         buf = buf.substr(i+1);
+         i = buf.indexOf("\n");
+       }
+     });
+
+     // First, reset tsbt.js
+     connection.write("LED1.set();\n", function() {
+       // Wait for it to reset itself
+       console.log("Aguarde até 10 segundos");
+       setTimeout(function() {
+         connection.write("seekPrm()\n",  function() { console.log("Lido..."); });
+         }, 1500);
+       });
+     },filters);
+
+ } 
+  </script>
+
+</body></html>
+
