@@ -87,7 +87,13 @@ function onLine(line) {
     // o.log.log(e);
    }
  }
- var filters = {
+ 
+  var NORDIC_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+  var NORDIC_TX = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+  var NORDIC_RX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+  var CHUNKSIZE = 16;
+
+ var bleParam = {
       filters:[
         { namePrefix: 'TS03 BT399' },
         { namePrefix: 'TS03 BT000' },
@@ -95,7 +101,7 @@ function onLine(line) {
       ], optionalServices: [ NORDIC_SERVICE ]};
  var connection;
  function connectDevice() {
-   TSBT.connect(function(c) {
+   TSBT.connect(bleParam,function(c) {
      if (!c) {
        alert("Desconectado!");
        return;
@@ -127,7 +133,7 @@ function onLine(line) {
          connection.write("seekPrm()\n",  function() { console.log("Lido..."); });
          }, 1500);
        });
-     },filters);
+     });
 
  } 
   </script>

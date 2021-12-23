@@ -116,13 +116,12 @@ Or more advanced usage with control of the connection
     else log(1,"Unknown queue item "+JSON.stringify(q));
   }
 
-  var defaultFilters = {
-    filters:[
-      { namePrefix: 'TS' },
-      { services: [ NORDIC_SERVICE ] }
-    ], optionalServices: [ NORDIC_SERVICE ]};
 
-  function connect(callback,filters = defaultFilters) {
+  function connect(bleParam,callback) {
+    bleParam.filters=   bleParam.filters ||[ { namePrefix: 'TS' }, { services: [ NORDIC_SERVICE ] }];
+
+    bleParam.optionalServices = bleParam.optionalServices ||  [ NORDIC_SERVICE ] ;
+
     if (!checkIfSupported()) return;
 
 
@@ -199,7 +198,7 @@ Or more advanced usage with control of the connection
       }
     };
 
-    navigator.bluetooth.requestDevice(filters).then(function(device) {
+    navigator.bluetooth.requestDevice(bleParam).then(function(device) {
       log(1, 'Device Name:       ' + device.name);
       log(1, 'Device ID:         ' + device.id);
       // Was deprecated: Should use getPrimaryServices for this in future
