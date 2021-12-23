@@ -95,10 +95,22 @@ function onLine(line) {
 
  var bleParam = {
       filters:[
+        { namePrefix: 'TS00 BT399' },
+        { namePrefix: 'TS01 BT399' },
+        { namePrefix: 'TS02 BT399' },
         { namePrefix: 'TS03 BT399' },
-        { namePrefix: 'TS03 BT000' },
+        { namePrefix: 'TS04 BT399' },
+        { namePrefix: 'TS05 BT399' },
+        { namePrefix: 'TS06 BT399' },
+        { namePrefix: 'TS07 BT399' },
+        { namePrefix: 'TS08 BT399' },
+        { namePrefix: 'TS09 BT399' },
+
         { services: [ NORDIC_SERVICE ] }
-      ], optionalServices: [ NORDIC_SERVICE ]};
+      ],
+      optionalServices: [ NORDIC_SERVICE ]}; 
+
+ bleParam=[];     
  var connection;
  function connectDevice() {
    TSBT.connect(bleParam,function(c) {
