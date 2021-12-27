@@ -33,18 +33,13 @@
     
     var o = {
       l:TD.label({x:10,y:10,width:90,height:40,label:"TSBT"}),   
-      le:TD.label({x:110,y:10,width:120,height:40,label:""}),
-      bal:TD.label({x:240,y:10,width:170,height:40,label:""}),
-
       bk:TD.label({x:10,y:60,width:90,height:50,label:"Banco"}),
-      bke:TD.value({x:110,y:60,width:120,height:50,label:"",value:"1",min:0,step:1,max:10}),
-      //bkn:TD.value({x:10,y:230,width:300,height:60,label:"alterar banco",value:"1",min:1,step:1,max:10}),
-      bt:TD.label({x:10,y:110,width:90,height:60,label:"Bateria"}),
-      btn:TD.value({x:110,y:110,width:120,height:60,label:"",value:"1",min:0,step:1,max:399}),
-      //bte:TD.label({x:110,y:110,width:120,height:40,label:batt}),
-      //v:TD.gauge({x:220,y:10,width:200,height:210,label:"Tensão 2.5 a 4.5 V",value:"3.25",min:2.5,max:4.5,name:"gaugeV"}),     
-      modal1:TD.modal({x:240,y:85,width:170,height:45,label:"parear",onchange:connectDevice}),
-      modal2:TD.modal({x:240,y:85,width:170,height:40,label:"sair",onchange:
+      bke:TD.label({x:110,y:60,width:120,height:50,label:""}),
+   
+      bq:TD.gauge({x:10,y:120,width:220,height:190,label:"Próxima bateria",value:"0",min:1,max:398,name:"gaugeBq"}),
+     
+      modal1:TD.modal({x:110,y:10,width:120,height:40,label:"<p style='color:green;'>parear</p>",onchange:connectDevice}),
+      modal2:TD.modal({x:110,y:10,width:120,height:40,label:"<p style='color:red;'>sair</p>",onchange:
       function(e){try{connection.write('LED1.set();LED2.set();changeFreqSensor();NRF.disconnect()\n')} catch(e){alert("Erro ao pressionar o botão Sair ")}}
     
     })
@@ -65,26 +60,28 @@ function onLine(line) {
    try {
     var patt = new RegExp("{.*}");
      var j = JSON.parse(patt.exec(line));
-     if (Object.keys(j).length > 1){
+     console.log ("obj "+ JSON.stringify(j));    
+     if (Object.keys(j).length >= 1){
+        try{
+          o.l.firstElementChild.innerText=(j.TSt?j.TSt:"TSBT");
+        }catch(e) {
+             // console.log("error "+e);
+        };
 
-          prm=j;
-
-          batt = j.TGn.substr(-5);
-
-          //o.do.hidden=(j.TGn.substr(-5)!="BT000"?true:false); 
-          //(j.TStype!='TSGW'?o.btn.setValue((isNaN(j.Btn)?0:j.Btn)):"");   
-          o.l.firstElementChild.innerText=(j.TStype?j.TStype:"TSBT");
-          //lcld=o.le.firstElementChild.innerText;
-          //setTimeout(function(){if (j.L){o.le.firstElementChild.innerText=j.L}else{o.le.firstElementChild.innerText="localidade"}},20000);
-          o.bt.firstElementChild.innerText="Bateria\n "+j.TGn.substr(-5);
-          o.bk.firstElementChild.innerText="Banco\n "+j.TGn.substr(0,4);
-          o.bke.setValue(parseInt(j.TGn.substr(2,3)));
-          o.btn.setValue(parseInt(j.TGn.substr(-3)));
-
+        try{
+          o.bke.firstElementChild.innerText= j.TGn.substr(0,4);
+        }catch(e) {
+             // console.log("error "+e);
+        };
+        try{
+            o.bq.setValue((j.nBtn?j.nBtn:o.bq.value));
+        }catch(e) {
+             // console.log("error "+e);
+        };
      }
 
    } catch(e) {
-    // o.log.log(e);
+    //console.log(e);
    }
  }
  
@@ -106,11 +103,12 @@ function onLine(line) {
         { namePrefix: 'TS08 BT399' },
         { namePrefix: 'TS09 BT399' },
 
-        { services: [ NORDIC_SERVICE ] }
+ //       { services: [ NORDIC_SERVICE ] }
       ],
-      optionalServices: [ NORDIC_SERVICE ]}; 
+ //     optionalServices: [ NORDIC_SERVICE ]
+    }; 
 
- bleParam=[];     
+ //bleParam=[];     
  var connection;
  function connectDevice() {
    TSBT.connect(bleParam,function(c) {
@@ -130,7 +128,6 @@ function onLine(line) {
        buf += d;
        var i = buf.indexOf("\n");
        while (i>=0) {
-        console.log(buf.substr(0,i));
          onLine(buf.substr(0,i));
          buf = buf.substr(i+1);
          i = buf.indexOf("\n");

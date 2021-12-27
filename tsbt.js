@@ -115,7 +115,7 @@ Or more advanced usage with control of the connection
 
   function connect(bleParam,callback) {
     console.log(bleParam);
-    bleParam.filters=   bleParam.filters ||[ { namePrefix: 'TS04' }, { services: [ NORDIC_SERVICE ] }];
+    bleParam.filters=   bleParam.filters ||[ { namePrefix: 'TS' }, { services: [ NORDIC_SERVICE ] }];
 
     bleParam.optionalServices = bleParam.optionalServices ||  [ NORDIC_SERVICE ] ;
 
