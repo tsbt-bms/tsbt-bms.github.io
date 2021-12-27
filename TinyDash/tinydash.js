@@ -75,7 +75,7 @@ var TD = {};
   /* {label, glyph, value, toggle}*/
   TD.button = function(opts) {
     var pressed = opts.value?1:0;
-    opts.glyph = opts.glyph || "&#x1f4a1;";
+    opts.glyph = opts.glyph || "&#x2398;";
     var el = setup("button",opts,toElement('<div class="td td_btn" pressed="'+pressed+'"><span>'+opts.label+'</span><div class="td_btn_a">'+opts.glyph+'</div></div>'));
     el.getElementsByClassName("td_btn_a")[0].onclick = function() {
       togglePressed(el);
