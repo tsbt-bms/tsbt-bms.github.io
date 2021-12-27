@@ -1,6 +1,6 @@
 [{
         "relation": ["delegate_permission/common.handle_all_urls"],
         "target" : { "namespace": "android_app", "package_name": "io.github.tsbt_bms.twa",
-                     "sha256_cert_fingerprints": ["3D:70:03:42:E1:21:25:A7:7F:26:0B:28:6B:B1:C8:CD:73:92:48:4E:B1:E3:74:57:AE:B9:9C:7C:D1:B2:DD:8C"] }
+                     "sha256_cert_fingerprints": ["46:1E:FF:37:81:05:9B:7F:04:87:04:EB:A7:6B:7C:F0:B6:40:D2:06:9E:00:CC:74:8E:6E:2C:C1:32:93:3C:B0"] }
       }
 ]
