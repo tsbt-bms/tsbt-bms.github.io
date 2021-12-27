@@ -1,1 +1,0 @@
-[numera](./numera.html)
