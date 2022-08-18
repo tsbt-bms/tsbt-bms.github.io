@@ -90,7 +90,7 @@ function onLine(line) {
   var NORDIC_RX = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
   var CHUNKSIZE = 16;
 
- var bleParam = {
+ /*var bleParam = {
       filters:[
         { namePrefix: 'TS00 BT399' },
         { namePrefix: 'TS01 BT399' },
@@ -107,8 +107,8 @@ function onLine(line) {
       ],
  //     optionalServices: [ NORDIC_SERVICE ]
     }; 
-
- //bleParam=[];     
+*/
+ var bleParam=[];     
  var connection;
  function connectDevice() {
    TSBT.connect(bleParam,function(c) {
